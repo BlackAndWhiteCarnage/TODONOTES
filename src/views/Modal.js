@@ -80,6 +80,9 @@ const Option = styled.li`
   font-size: 0;
   cursor: pointer;
   white-space: nowrap;
+  &:hover {
+    border-bottom: 2px solid black;
+  }
   span {
     font-weight: bold;
     color: #01c915;

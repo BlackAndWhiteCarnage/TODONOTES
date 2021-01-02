@@ -2,22 +2,16 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import HeroImg from "../images/Hero.png";
 import AddIcon from "../images/AddIcon.svg";
+import Todo from "../components/Todo";
+import { useDispatch } from "react-redux";
 
 const Hero = () => {
+  const dispatch = useDispatch();
   const [toggleOptions, setToggleOptions] = useState(false);
   const textToggle = useRef(String);
   const chooseOption = () => {
     setToggleOptions(!toggleOptions);
   };
-
-  // setInterval(() => {
-  //   if (textToggle.current.innerHTML === "notatniki") {
-  //     textToggle.current.innerHTML = "zadania";
-  //   } else if (textToggle.current.innerHTML === "zadania") {
-  //     textToggle.current.innerHTML = "notatki";
-  //   } else if (textToggle.current.innerHTML === "notatki")
-  //     textToggle.current.innerHTML = "notatniki";
-  // }, 1000);
 
   return (
     <>
@@ -29,10 +23,11 @@ const Hero = () => {
           <MainIcon src={AddIcon} onClick={chooseOption} />
         </IconWrapper>
         <ButtonsWrapper className={toggleOptions && "toggle"}>
-          <Button>Notatnik</Button>
-          <Button>Zadanie</Button>
+          <Button onClick={() => console.log("NOTATNIK")}>Notatnik</Button>
+          <Button onClick={() => dispatch({ type: "TOGGLE" })}>Zadanie</Button>
         </ButtonsWrapper>
       </HeaderWrapper>
+      <Todo />
       <HeroImage src={HeroImg} />
     </>
   );
@@ -80,7 +75,9 @@ const ButtonsWrapper = styled.div`
   display: flex;
   transition: 0.5s ease;
   opacity: 0;
+  pointer-events: none;
   &.toggle {
+    pointer-events: all;
     opacity: 1;
   }
 `;
@@ -94,9 +91,9 @@ const Button = styled.button`
   margin: 1.5rem;
   color: #fff;
   background: #01c915;
-  cursor: pointer;
   transition: 0.5s ease;
   &:hover {
+    cursor: pointer;
     background: #fff;
     color: #01c915;
     transition: 0.5s ease;
@@ -117,8 +114,7 @@ const IconWrapper = styled.div`
     border-radius: 50%;
     animation: Pulse ease 4s infinite;
     @media (max-width: 820px) {
-      width: 3rem;
-      height: 3rem;
+      display: none;
     }
   }
   @keyframes Pulse {
