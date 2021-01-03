@@ -2,10 +2,13 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import HeroImg from "../images/Hero.png";
 import AddIcon from "../images/AddIcon.svg";
-import Todo from "../components/Todo";
+import Task from "../components/Task";
+import Notebook from "../components/Notebook";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Hero = () => {
+  const toggle = useSelector((state) => state.toggle);
   const dispatch = useDispatch();
   const [toggleOptions, setToggleOptions] = useState(false);
   const textToggle = useRef(String);
@@ -15,7 +18,7 @@ const Hero = () => {
 
   return (
     <>
-      <HeaderWrapper>
+      <HeaderWrapper className={toggle ? "toggle" : "toggleOut"}>
         <Header>
           Dodawaj Jednym Kliknięciem <span ref={textToggle}>zadania</span>
         </Header>
@@ -23,11 +26,16 @@ const Hero = () => {
           <MainIcon src={AddIcon} onClick={chooseOption} />
         </IconWrapper>
         <ButtonsWrapper className={toggleOptions && "toggle"}>
-          <Button onClick={() => console.log("NOTATNIK")}>Notatnik</Button>
-          <Button onClick={() => dispatch({ type: "TOGGLE" })}>Zadanie</Button>
+          <Button onClick={() => dispatch({ type: "NOTEBOOKTOGGLE" })}>
+            Notatnik
+          </Button>
+          <Button onClick={() => dispatch({ type: "TASKTOGGLE" })}>
+            Zadanie
+          </Button>
         </ButtonsWrapper>
       </HeaderWrapper>
-      <Todo />
+      <Task />
+      <Notebook />
       <HeroImage src={HeroImg} />
     </>
   );
@@ -48,6 +56,9 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 2;
+  &.toggle {
+    display: none;
+  }
   @media (max-width: 820px) {
     width: 100%;
     margin: auto;
