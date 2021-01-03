@@ -6,6 +6,7 @@ import Task from "../components/Task";
 import Notebook from "../components/Notebook";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Button from "../components/Button";
 
 const Hero = () => {
   const toggle = useSelector((state) => state.toggle);
@@ -26,12 +27,14 @@ const Hero = () => {
           <MainIcon src={AddIcon} onClick={chooseOption} />
         </IconWrapper>
         <ButtonsWrapper className={toggleOptions && "toggle"}>
-          <Button onClick={() => dispatch({ type: "NOTEBOOKTOGGLE" })}>
-            Notatnik
-          </Button>
-          <Button onClick={() => dispatch({ type: "TASKTOGGLE" })}>
-            Zadanie
-          </Button>
+          <Button
+            value={"Notatnik"}
+            click={() => dispatch({ type: "NOTEBOOKTOGGLE" })}
+          />
+          <Button
+            value={"Zadanie"}
+            click={() => dispatch({ type: "TASKTOGGLE" })}
+          />
         </ButtonsWrapper>
       </HeaderWrapper>
       <Task />
@@ -90,24 +93,6 @@ const ButtonsWrapper = styled.div`
   &.toggle {
     pointer-events: all;
     opacity: 1;
-  }
-`;
-
-const Button = styled.button`
-  width: 10rem;
-  height: 4rem;
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
-  font-weight: bold;
-  border: none;
-  margin: 1.5rem;
-  color: #fff;
-  background: #01c915;
-  transition: 0.5s ease;
-  &:hover {
-    cursor: pointer;
-    background: #fff;
-    color: #01c915;
-    transition: 0.5s ease;
   }
 `;
 

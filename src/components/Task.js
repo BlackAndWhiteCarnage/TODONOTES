@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import xMark from "../images/X-Mark.svg";
+import TasksList from "./TasksList";
+import Button from "./Button";
+
+const tasks = [];
 
 const Task = () => {
+  const inputRef = useRef();
   const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
+
   return (
-    <TaskWrapper className={toggle === 1 ? "toggle" : "toggleOut"}>
-      <label htmlFor="Task">Zadanie</label>
-      <input id="Task" type="text" />
-      <button>Dodaj</button>
-      <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
-    </TaskWrapper>
+    <>
+      <TaskWrapper className={toggle === 1 ? "toggle" : "toggleOut"}>
+        <label htmlFor="Task">Zadanie</label>
+        <input ref={inputRef} id="Task" type="text" />
+        <Button
+          click={() => {
+            tasks.push(inputRef.current.value);
+            dispatch({ type: "ADDTASK" });
+          }}
+          value={"Dodaj"}
+        />
+        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
+      </TaskWrapper>
+      <TasksWrapper className={toggle === 3 ? "toggle" : "toggleOut"}>
+        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
+        {tasks.map((value, index) => (
+          <TasksList key={index} index={index} value={value}></TasksList>
+        ))}
+      </TasksWrapper>
+    </>
   );
 };
 
@@ -45,20 +65,6 @@ const TaskWrapper = styled.div`
   }
   button {
     margin: 0 4rem 1rem auto;
-    width: 10rem;
-    height: 4rem;
-    font-size: clamp(1.6rem, 2.5vw, 2rem);
-    font-weight: bold;
-    border: none;
-    color: #fff;
-    background: #01c915;
-    transition: 0.5s ease;
-    &:hover {
-      cursor: pointer;
-      background: #fff;
-      color: #01c915;
-      transition: 0.5s ease;
-    }
   }
   &.toggle {
     opacity: 1;
@@ -78,6 +84,27 @@ const Icon = styled.img`
   &:hover {
     transition: 0.5s ease;
     transform: scale(1.2) rotate(360deg);
+  }
+`;
+
+const TasksWrapper = styled.div`
+  display: none;
+  padding: 4rem 0;
+  &.toggle {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-0%, -50%);
+    z-index: 5;
+    transition: 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    align-items: center;
+    background-color: #f6f6f6;
+    width: 70%;
+    height: 40rem;
+    transition: 0.5s ease;
   }
 `;
 

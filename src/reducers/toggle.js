@@ -6,6 +6,8 @@ const toggleReducer = (state = 0, action) => {
       return (state = 1);
     case "NOTEBOOKTOGGLE":
       return (state = 2);
+    case "ADDTASK":
+      return (state = 3);
     default:
       return state;
   }
