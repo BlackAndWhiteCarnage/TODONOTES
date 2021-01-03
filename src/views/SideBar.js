@@ -1,26 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../images/Logo.svg";
+import { useDispatch } from "react-redux";
 
-const Sidebar = () => (
-  <SideBarWrapper>
-    <SideBar>
-      <LogoWrapper src={Logo} />
-      <List>
-        <ListItem>Notatniki</ListItem>
-        <ListItem>Zadania</ListItem>
-        <ListItem>Kosz</ListItem>
-      </List>
-    </SideBar>
-  </SideBarWrapper>
-);
+const Sidebar = () => {
+  const dispatch = useDispatch();
+  return (
+    <SideBarWrapper>
+      <SideBar>
+        <LogoWrapper src={Logo} />
+        <List>
+          <ListItem>Notatniki</ListItem>
+          <ListItem onClick={() => dispatch({ type: "ADDTASK" })}>
+            Zadania
+          </ListItem>
+          <ListItem>Kosz</ListItem>
+        </List>
+      </SideBar>
+    </SideBarWrapper>
+  );
+};
 
 const SideBarWrapper = styled.div`
   min-width: 15rem;
   height: 100vh;
   background: #fff;
   box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
-  z-index: 2;
+  z-index: 3;
   @media (max-width: 820px) {
     display: none;
   }

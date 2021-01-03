@@ -3,10 +3,12 @@ import styled from "styled-components";
 import DarkModeIcon from "../images/DarkModeIcon.svg";
 import ColorIcon from "../images/ColorIcon.svg";
 import AddIcon from "../images/AddIcon.svg";
+import { useDispatch } from "react-redux";
 
 const Modal = () => {
   const [showColors, setShowColors] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <ModalWrapper>
@@ -19,10 +21,16 @@ const Modal = () => {
       <Icon src={DarkModeIcon} />
       <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
       <Options className={showOptions && "toggle"}>
-        <Option className={showOptions && "toggle"}>
+        <Option
+          className={showOptions && "toggle"}
+          onClick={() => dispatch({ type: "NOTEBOOKTOGGLE" })}
+        >
           Nowy <span>notatnik</span>
         </Option>
-        <Option className={showOptions && "toggle"}>
+        <Option
+          className={showOptions && "toggle"}
+          onClick={() => dispatch({ type: "TASKTOGGLE" })}
+        >
           Nowe <span>zadanie</span>
         </Option>
         <Option className={showOptions && "toggle"}>

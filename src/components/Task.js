@@ -49,6 +49,7 @@ const TaskWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+  pointer-events: none;
   label {
     font-size: 2.4rem;
     margin: auto 0 0 4rem;
@@ -72,6 +73,7 @@ const TaskWrapper = styled.div`
     width: 70%;
     height: 15rem;
     transition: 0.5s ease;
+    pointer-events: all;
   }
 `;
 
