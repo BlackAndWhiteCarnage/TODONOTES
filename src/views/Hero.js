@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import HeroImg from "../images/Hero.png";
 import AddIcon from "../images/AddIcon.svg";
-import Task from "../components/Task";
+import TaskWrapper from "../components/TaskWrapper";
 import Notebook from "../components/Notebook";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -37,7 +37,7 @@ const Hero = () => {
           />
         </ButtonsWrapper>
       </HeaderWrapper>
-      <Task />
+      <TaskWrapper />
       <Notebook />
       <HeroImage src={HeroImg} />
     </>

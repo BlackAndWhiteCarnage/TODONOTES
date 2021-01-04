@@ -1,111 +1,80 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import xMark from "../images/X-Mark.svg";
-import TasksList from "./TasksList";
-import Button from "./Button";
+import CheckIcon from "../images/CheckIcon.svg";
+import InfoIcon from "../images/InfoIcon.svg";
+import xMarkTransparent from "../images/X-Mark-Transparent.svg";
 
-const tasks = [];
+const Task = ({ text, tasks, task, setTasks }) => {
+  const [checked, setChecked] = useState(false);
 
-const Task = () => {
-  const inputRef = useRef();
-  const dispatch = useDispatch();
-  const toggle = useSelector((state) => state.toggle);
+  const deleteHandler = () => {
+    setTasks(tasks.filter((el) => el.id !== task.id));
+  };
+
+  const completeHandler = () => {
+    setTasks(
+      tasks.map((el) => {
+        if (el.id === task.id) {
+          return {
+            ...el,
+            completed: !el.completed,
+          };
+        }
+        return el;
+      })
+    );
+  };
 
   return (
     <>
-      <TaskWrapper className={toggle === 1 ? "toggle" : "toggleOut"}>
-        <label htmlFor="Task">Zadanie</label>
-        <input ref={inputRef} id="Task" type="text" />
-        <Button
-          click={() => {
-            tasks.push(inputRef.current.value);
-            dispatch({ type: "ADDTASK" });
-          }}
-          value={"Dodaj"}
-        />
-        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
-      </TaskWrapper>
-      <TasksWrapper className={toggle === 3 ? "toggle" : "toggleOut"}>
-        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
-        {tasks.map((value, index) => (
-          <TasksList key={index} index={index} value={value}></TasksList>
-        ))}
-      </TasksWrapper>
+      <Wrapper className={task.completed && "checked"}>
+        <TaskHeader>{text}</TaskHeader>
+        <IconWrapper>
+          <Icon src={CheckIcon} onClick={completeHandler} />
+          <Icon src={InfoIcon} />
+          <Icon src={xMarkTransparent} onClick={deleteHandler} />
+        </IconWrapper>
+      </Wrapper>
     </>
   );
 };
 
-const TaskWrapper = styled.div`
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-0%, -50%);
-  z-index: 5;
-  transition: 0.5s ease;
+const Wrapper = styled.div`
+  width: 95%;
+  min-height: 4rem;
+  margin: 1rem 0;
+  background: #fff;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  pointer-events: none;
-  label {
-    font-size: 2.4rem;
-    margin: auto 0 0 4rem;
-    cursor: pointer;
-  }
-  input {
-    border: none;
-    width: 90%;
-    height: 2rem;
-    margin: auto;
-    font-size: 1.6rem;
-    border-bottom: 3px solid #01c915;
-    padding: 1rem 0;
-  }
-  button {
-    margin: 0 4rem 1rem auto;
-  }
-  &.toggle {
-    opacity: 1;
-    background-color: #f6f6f6;
-    width: 70%;
-    height: 15rem;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.5s ease;
+  &.checked {
+    background: #dfdfdf;
     transition: 0.5s ease;
-    pointer-events: all;
   }
+`;
+
+const TaskHeader = styled.h2`
+  margin-left: 1rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+`;
+
+const IconWrapper = styled.div`
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 const Icon = styled.img`
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
   cursor: pointer;
   transition: 0.5s ease;
+  border-radius: 50%;
   &:hover {
-    transition: 0.5s ease;
-    transform: scale(1.2) rotate(360deg);
-  }
-`;
-
-const TasksWrapper = styled.div`
-  display: none;
-  padding: 4rem 0;
-  &.toggle {
-    position: absolute;
-    top: 50%;
-    left: 20%;
-    transform: translate(-0%, -50%);
-    z-index: 5;
-    transition: 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    align-items: center;
-    background-color: #f6f6f6;
-    width: 70%;
-    height: 40rem;
+    transform: scale(1.2);
     transition: 0.5s ease;
   }
 `;
