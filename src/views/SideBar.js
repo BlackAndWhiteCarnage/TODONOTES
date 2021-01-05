@@ -10,7 +10,9 @@ const Sidebar = () => {
       <SideBar>
         <LogoWrapper src={Logo} />
         <List>
-          <ListItem>Notatniki</ListItem>
+          <ListItem onClick={() => dispatch({ type: "NOTEBOOKSLISTS" })}>
+            Notatniki
+          </ListItem>
           <ListItem onClick={() => dispatch({ type: "ADDTASK" })}>
             Zadania
           </ListItem>

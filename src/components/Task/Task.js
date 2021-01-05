@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import CheckIcon from "../images/CheckIcon.svg";
-import InfoIcon from "../images/InfoIcon.svg";
-import xMarkTransparent from "../images/X-Mark-Transparent.svg";
+import CheckIcon from "../../images/CheckIcon.svg";
+import InfoIcon from "../../images/InfoIcon.svg";
+import xMarkTransparent from "../../images/X-Mark-Transparent.svg";
 
 const Task = ({ text, tasks, task, setTasks }) => {
-  const [checked, setChecked] = useState(false);
-
   const deleteHandler = () => {
     setTasks(tasks.filter((el) => el.id !== task.id));
   };
@@ -30,7 +28,11 @@ const Task = ({ text, tasks, task, setTasks }) => {
       <Wrapper className={task.completed && "checked"}>
         <TaskHeader>{text}</TaskHeader>
         <IconWrapper>
-          <Icon src={CheckIcon} onClick={completeHandler} />
+          <Icon
+            src={CheckIcon}
+            onClick={completeHandler}
+            className={task.completed && "checked"}
+          />
           <Icon src={InfoIcon} />
           <Icon src={xMarkTransparent} onClick={deleteHandler} />
         </IconWrapper>
@@ -76,6 +78,9 @@ const Icon = styled.img`
   &:hover {
     transform: scale(1.2);
     transition: 0.5s ease;
+  }
+  &.checked {
+    background: #01c915;
   }
 `;
 

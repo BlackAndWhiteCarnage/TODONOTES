@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import Button from "./Button";
+import Button from "../Button";
 
 const TaskForm = ({ inputText, setInputText, tasks, setTasks }) => {
   const dispatch = useDispatch();

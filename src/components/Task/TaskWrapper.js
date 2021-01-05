@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import xMark from "../images/X-Mark.svg";
+import xMark from "../../images/X-Mark.svg";
 import TasksList from "./TasksList";
 import TaskForm from "./TaskForm";
 
@@ -18,12 +18,8 @@ const TaskWrapper = () => {
   }, []);
 
   useEffect(() => {
-    saveTasks();
-  }, [tasks]);
-
-  const saveTasks = () => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
+  }, [tasks]);
 
   const getTasks = () => {
     if (localStorage.getItem("tasks") === null) {
@@ -36,7 +32,7 @@ const TaskWrapper = () => {
 
   return (
     <>
-      <Wrapper className={toggle === 1 ? "toggle" : "toggleOut"}>
+      <Wrapper className={toggle === 1 && "toggle"}>
         <TaskForm
           tasks={tasks}
           setTasks={setTasks}
@@ -45,7 +41,7 @@ const TaskWrapper = () => {
         />
         <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
       </Wrapper>
-      <TasksWrapper className={toggle === 3 ? "toggle" : "toggleOut"}>
+      <TasksWrapper className={toggle === 3 && "toggle"}>
         <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
         <TasksList tasks={tasks} setTasks={setTasks} />
       </TasksWrapper>
@@ -60,12 +56,14 @@ const Wrapper = styled.div`
   left: 20%;
   transform: translate(-0%, -50%);
   z-index: 5;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
   pointer-events: none;
+  width: 0;
+  height: 15rem;
   label {
     font-size: 2.4rem;
     margin: auto 0 0 4rem;
@@ -87,7 +85,6 @@ const Wrapper = styled.div`
     opacity: 1;
     background-color: #f6f6f6;
     width: 70%;
-    height: 15rem;
     transition: 0.5s ease;
     pointer-events: all;
   }
@@ -106,16 +103,21 @@ const Icon = styled.img`
 `;
 
 const TasksWrapper = styled.div`
-  display: none;
-  padding: 4rem 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
   &.toggle {
+    display: flex;
+    padding: 4rem 0;
+    opacity: 1;
     position: absolute;
+    pointer-events: all;
     top: 50%;
     left: 20%;
     transform: translate(-0%, -50%);
     z-index: 5;
     transition: 0.5s ease;
-    display: flex;
     flex-direction: column;
     overflow-y: scroll;
     align-items: center;

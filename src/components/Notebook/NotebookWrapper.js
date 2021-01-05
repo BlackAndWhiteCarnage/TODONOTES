@@ -1,36 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import xMark from "../images/X-Mark.svg";
-import NotebooksList from "./NotebooksList";
-import Button from "./Button";
+import xMark from "../../images/X-Mark.svg";
+import NotebookList from "./NotebookList";
+import NotebookForm from "./NotebookForm";
 
-const Notebook = () => {
+const NotebookWrapper = () => {
   const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
+
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputDesc, setInputDesc] = useState("");
+  const [note, setNote] = useState([]);
+
   return (
     <>
-      <NotebookWrapper className={toggle === 2 ? "toggle" : "toggleOut"}>
-        <label htmlFor="Notebook">Nazwa Notatnika</label>
-        <TitleInput id="Notebook" type="text" />
-        <label htmlFor="Description">Opis</label>
-        <DescriptionInput id="Description" type="text" />
-        <Button
-          value={"Dodaj"}
-          click={() => dispatch({ type: "NOTEBOOKSLISTS" })}
+      <Wrapper className={toggle === 2 ? "toggle" : "toggleOut"}>
+        <NotebookForm
+          note={note}
+          setNote={setNote}
+          inputTitle={inputTitle}
+          setInputTitle={setInputTitle}
+          inputDesc={inputDesc}
+          setInputDesc={setInputDesc}
         />
         <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
-      </NotebookWrapper>
-      <NotebooksListWrapper className={toggle === 4 ? "toggle" : "toggleOut"}>
-        <NotebooksList />
+      </Wrapper>
+      <NotebooksListWrapper className={toggle === 4 && "toggle"}>
+        <NotebookList note={note} setNote={setNote} />
       </NotebooksListWrapper>
     </>
   );
 };
 
-const NotebookWrapper = styled.div`
+const Wrapper = styled.div`
   opacity: 0;
+  width: 0;
+  transition: 0.5s ease;
   position: absolute;
   pointer-events: none;
   top: 50%;
@@ -60,26 +67,6 @@ const NotebookWrapper = styled.div`
   }
 `;
 
-const TitleInput = styled.input`
-  border: none;
-  width: 90%;
-  height: 2rem;
-  margin: auto;
-  font-size: 1.6rem;
-  border-bottom: 3px solid #01c915;
-  padding: 1rem 0;
-`;
-
-const DescriptionInput = styled.textarea`
-  border: none;
-  width: 90%;
-  height: 8rem;
-  margin: auto;
-  font-size: 2rem;
-  border-bottom: 3px solid #01c915;
-  resize: none;
-`;
-
 const Icon = styled.img`
   position: absolute;
   right: 1rem;
@@ -93,13 +80,16 @@ const Icon = styled.img`
 `;
 
 const NotebooksListWrapper = styled.div`
-  display: none;
+  opacity: 0;
   z-index: 2;
+  transition: 0.5s ease;
   &.toggle {
+    opacity: 1;
     width: 100%;
     height: 100vh;
     display: block;
+    transition: 0.5s ease;
   }
 `;
 
-export default Notebook;
+export default NotebookWrapper;
