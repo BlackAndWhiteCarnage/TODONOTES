@@ -24,7 +24,12 @@ const TaskForm = ({
   const submitNoteHandler = () => {
     setNote([
       ...note,
-      { title: inputTitle, description: inputDesc, id: Math.random() * 1000 },
+      {
+        title: inputTitle,
+        description: inputDesc,
+        notesItems: [],
+        id: Math.random() * 1000,
+      },
     ]);
     setInputTitle("");
     setInputDesc("");

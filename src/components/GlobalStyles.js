@@ -6,10 +6,13 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
     }
+    html{
+        overflow: hidden;
+    }
     body{
         font-family: 'Montserrat', sans-serif;
         font-size: 62.5%;
-        overflow: hidden;
+        overflow-y: scroll;
     }
 `;
 

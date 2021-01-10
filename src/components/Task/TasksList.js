@@ -23,7 +23,7 @@ const Info = styled.div`
   width: 100%;
   height: 100%;
   font-size: 2.4rem;
-  color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.3);
   font-weight: bold;
   display: flex;
   align-items: center;

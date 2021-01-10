@@ -50,14 +50,13 @@ const TaskWrapper = () => {
 };
 
 const Wrapper = styled.div`
-  opacity: 0;
+  display: none;
   position: absolute;
   top: 50%;
-  left: 20%;
-  transform: translate(-0%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 5;
   transition: 0.3s ease;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
@@ -83,6 +82,7 @@ const Wrapper = styled.div`
   }
   &.toggle {
     opacity: 1;
+    display: flex;
     background-color: #f6f6f6;
     width: 70%;
     transition: 0.5s ease;
@@ -114,15 +114,15 @@ const TasksWrapper = styled.div`
     position: absolute;
     pointer-events: all;
     top: 50%;
-    left: 20%;
-    transform: translate(-0%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 5;
     transition: 0.5s ease;
     flex-direction: column;
     overflow-y: scroll;
     align-items: center;
     background-color: #f6f6f6;
-    width: 70%;
+    width: 60%;
     height: 40rem;
     transition: 0.5s ease;
   }

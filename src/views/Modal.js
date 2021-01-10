@@ -42,15 +42,15 @@ const Modal = () => {
 };
 
 const ModalWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   width: auto;
-  height: 3.5rem;
+  height: 100vh;
   background: #fff;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   z-index: 3;
   box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
   &.toggle {
@@ -64,21 +64,24 @@ const ModalWrapper = styled.div`
 const Colors = styled.div`
   transition: 0.5s ease;
   width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  display: none;
   &.toggle {
     width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 `;
 
 const Options = styled.div`
   transition: 0.5s ease;
   width: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-around;
   &.toggle {
+    display: flex;
+
     width: 40rem;
   }
 `;

@@ -1,51 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Notebook from "./Notebook";
+// import Note from "./Not";
+import Note from "./Note";
 
 const NotebookList = ({ note, setNote }) => {
   return (
-    <NotebooksListWrapper>
-      <Notebooks>
-        <Header>
-          {note.length === 0
-            ? "Nie masz jeszcze żadnych notatników"
-            : "Twoje notatniki"}
-        </Header>
-        {note.map((item) => (
-          <Notebook
-            title={item.title}
-            key={item.id}
-            description={item.description}
-            note={note}
-            item={item}
-            setNote={setNote}
-          />
+    <NotebookListWrapper>
+      {note.length === 0 && <Info>Nie masz jeszcze żadnych notatników</Info>}
+      <Wrapper>
+        {note.map((notes) => (
+          <>
+            <Note
+              title={notes.title}
+              description={notes.description}
+              key={notes.id}
+              note={note}
+              notes={notes}
+              setNote={setNote}
+            />
+          </>
         ))}
-      </Notebooks>
-    </NotebooksListWrapper>
+      </Wrapper>
+    </NotebookListWrapper>
   );
 };
 
-const NotebooksListWrapper = styled.div`
-  width: 15rem;
-  height: 100vh;
-  display: flex;
-`;
-
-const Notebooks = styled.div`
+const Info = styled.div`
   width: 100%;
   height: 100%;
+  font-size: 2.4rem;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: bold;
   display: flex;
-  flex-direction: column;
-  background: #f6f6f6;
-  box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
 `;
 
-const Header = styled.h3`
-  font-size: 1.6rem;
-  font-weight: 400;
-  text-align: center;
-  margin: 2rem 0;
+const NotebookListWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: auto;
+  margin: 6rem 0 0 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export default NotebookList;

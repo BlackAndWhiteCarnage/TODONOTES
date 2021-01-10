@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,23 @@ const NotebookWrapper = () => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputDesc, setInputDesc] = useState("");
   const [note, setNote] = useState([]);
+
+  // useEffect(() => {
+  //   getNotes();
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("notes", JSON.stringify(note));
+  // }, [note]);
+
+  // const getNotes = () => {
+  //   if (localStorage.getItem("notes") === null) {
+  //     localStorage.setItem("notes", JSON.stringify([]));
+  //   } else {
+  //     let taskLocal = JSON.parse(localStorage.getItem("notes"));
+  //     setNote(taskLocal);
+  //   }
+  // };
 
   return (
     <>
@@ -35,17 +52,16 @@ const NotebookWrapper = () => {
 };
 
 const Wrapper = styled.div`
-  opacity: 0;
+  display: none;
   width: 0;
   transition: 0.5s ease;
   position: absolute;
   pointer-events: none;
   top: 50%;
-  left: 20%;
-  transform: translate(-0%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 5;
   transition: 0.5s ease;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
@@ -58,6 +74,7 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
   &.toggle {
+    display: flex;
     opacity: 1;
     background-color: #f6f6f6;
     width: 70%;
@@ -82,12 +99,15 @@ const Icon = styled.img`
 const NotebooksListWrapper = styled.div`
   opacity: 0;
   z-index: 2;
+  display: none;
   transition: 0.5s ease;
   &.toggle {
     opacity: 1;
-    width: 100%;
+    width: 80%;
     height: 100vh;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: 0.5s ease;
   }
 `;

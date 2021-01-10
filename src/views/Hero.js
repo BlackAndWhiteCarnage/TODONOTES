@@ -18,8 +18,8 @@ const Hero = () => {
   };
 
   return (
-    <>
-      <HeaderWrapper className={toggle ? "toggle" : "toggleOut"}>
+    <Wrapper>
+      <HeaderWrapper className={toggle && "toggle"}>
         <Header>
           Dodawaj Jednym Kliknięciem <span ref={textToggle}>zadania</span>
         </Header>
@@ -40,12 +40,12 @@ const Hero = () => {
       <TaskWrapper />
       <NotebookWrapper />
       <HeroImage src={HeroImg} />
-    </>
+    </Wrapper>
   );
 };
 
 const HeroImage = styled.img`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -54,10 +54,12 @@ const HeroImage = styled.img`
 `;
 
 const HeaderWrapper = styled.div`
-  width: 80%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   z-index: 2;
   &.toggle {
     display: none;
@@ -66,6 +68,14 @@ const HeaderWrapper = styled.div`
     width: 100%;
     margin: auto;
   }
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const MainIcon = styled.img`
@@ -86,11 +96,12 @@ const MainIcon = styled.img`
 `;
 
 const ButtonsWrapper = styled.div`
-  display: flex;
+  display: none;
   transition: 0.5s ease;
   opacity: 0;
   pointer-events: none;
   &.toggle {
+    display: flex;
     pointer-events: all;
     opacity: 1;
   }
