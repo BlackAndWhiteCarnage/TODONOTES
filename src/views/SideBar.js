@@ -16,7 +16,6 @@ const Sidebar = () => {
           <ListItem onClick={() => dispatch({ type: "ADDTASK" })}>
             Zadania
           </ListItem>
-          <ListItem>Kosz</ListItem>
         </List>
       </SideBar>
     </SideBarWrapper>
@@ -27,9 +26,7 @@ const SideBarWrapper = styled.div`
   min-width: 10rem;
   height: 100vh;
   background: #fff;
-  box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
   z-index: 3;
-  position: fixed;
   @media (max-width: 820px) {
     display: none;
   }

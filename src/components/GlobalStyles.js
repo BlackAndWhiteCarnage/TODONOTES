@@ -12,7 +12,7 @@ const GlobalStyles = createGlobalStyle`
     body{
         font-family: 'Montserrat', sans-serif;
         font-size: 62.5%;
-        overflow-y: scroll;
+        overflow: hidden;
     }
 `;
 

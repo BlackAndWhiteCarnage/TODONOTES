@@ -19,7 +19,6 @@ const Home = () => {
 const HomeWrapper = styled.div`
   width: 100%;
   height: 100vh;
-
   display: flex;
 `;
 

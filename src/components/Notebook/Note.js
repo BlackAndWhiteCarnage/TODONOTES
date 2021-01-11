@@ -6,7 +6,7 @@ import AddIcon from "../../images/AddIcon.svg";
 import NoteForm from "./NoteForm";
 
 const Note = ({ title, description, note, notes, setNote }) => {
-  const [toggleNoteList, setToggleNoteList] = useState(true);
+  const [toggleNoteList, setToggleNoteList] = useState(false);
   const [inputTitle, setInputTitle] = useState("");
   const [inputDesc, setInputDesc] = useState("");
   const [copy, setCopy] = useState(notes.notesItems);
@@ -30,17 +30,15 @@ const Note = ({ title, description, note, notes, setNote }) => {
       parentId: notes.id,
     });
     setToggleNoteList(true);
-    console.log("copy", copy);
-    console.log("note", note);
-    console.log("notes", notes);
   };
 
   return (
-    <Wrapper className={`${notes.completed && "checked"}`}>
-      <InfoWrapper>
+    <Wrapper>
+      <InfoWrapper className={toggleNoteList && "toggle"}>
         <NoteInfoWrapper>
           <NoteHeader>{title}</NoteHeader>
           <NoteDesc>{description}</NoteDesc>
+          <h1>{copy.length}</h1>
         </NoteInfoWrapper>
         <IconWrapper>
           <Icon src={AddIcon} onClick={addNoteHandler} />
@@ -52,23 +50,14 @@ const Note = ({ title, description, note, notes, setNote }) => {
         </IconWrapper>
       </InfoWrapper>
       <>
-        {toggleNoteList && (
-          <NoteForm
-            note={note}
-            setNote={setNote}
-            // key={item.uuid}
-            // parentId={item.parentId}
-            notes={notes}
-            // title={item.noteTitle}
-            // description={item.noteDesc}
-            inputTitle={inputTitle}
-            setInputTitle={setInputTitle}
-            inputDesc={inputDesc}
-            setInputDesc={setInputDesc}
-            copy={copy}
-            setCopy={setCopy}
-          />
-        )}
+        <NoteForm
+          setInputTitle={setInputTitle}
+          setInputDesc={setInputDesc}
+          copy={copy}
+          toggleNoteList={toggleNoteList}
+          setToggleNoteList={setToggleNoteList}
+          setCopy={setCopy}
+        />
       </>
     </Wrapper>
   );
@@ -76,55 +65,49 @@ const Note = ({ title, description, note, notes, setNote }) => {
 
 const Wrapper = styled.div`
   position: relative;
-  width: 90%;
-  min-height: 5rem;
-  margin: 0.5rem 0;
-  background: #f6f6f6;
-  border-bottom: 1px solid grey;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  transition: 0.5s ease;
-  &.toggleNote {
-    transition: 0.5s ease;
-  }
-`;
-
-const InfoWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 5rem;
   width: 100%;
+  display: flex;
+  transition: 0.5s ease;
+`;
+const InfoWrapper = styled.div`
+  position: relative;
+  display: flex;
+  height: 10rem;
+  width: 10%;
+  background: #f6f6f6;
+  &.toggle {
+    position: fixed;
+    top: 0;
+    height: 20%;
+    background-color: grey;
+    z-index: 6;
+  }
 `;
 const NoteInfoWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
 `;
-
 const NoteHeader = styled.h2`
-  margin-left: 1rem;
   font-size: 1.6rem;
   font-weight: bold;
-  width: 50%;
+  width: 100%;
 `;
 const NoteDesc = styled.h3`
   font-size: 1.6rem;
   font-weight: 400;
-  width: 50%;
+  width: 100%;
 `;
-
 const IconWrapper = styled.div`
-  width: 20%;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  margin-right: 1rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-around;
 `;
-
 const Icon = styled.img`
   width: 2.5rem;
   height: 2.5rem;
@@ -137,21 +120,6 @@ const Icon = styled.img`
   }
   &.checked {
     background: #01c915;
-  }
-`;
-
-const ToggleNote = styled.img`
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
-  transition: 0.5s ease;
-  border-radius: 50%;
-  position: absolute;
-  right: 1rem;
-  top: 5rem;
-  &:hover {
-    transform: scale(1.2);
-    transition: 0.5s ease;
   }
 `;
 

@@ -46,10 +46,10 @@ const ModalWrapper = styled.div`
   right: 0;
   top: 0;
   width: auto;
-  height: 100vh;
+  height: 3.5rem;
   background: #fff;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   z-index: 3;
   box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
