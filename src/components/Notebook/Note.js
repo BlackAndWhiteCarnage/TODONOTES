@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import xMarkTransparent from "../../images/X-Mark-Transparent.svg";
 import ArrowDown from "../../images/Arrow-down.svg";
+import ArrowIn from "../../images/arrow-in.svg";
+import ArrowOut from "../../images/arrow-out.svg";
 import AddIcon from "../../images/AddIcon.svg";
 import NoteForm from "./NoteForm";
 
@@ -43,7 +45,7 @@ const Note = ({ title, description, note, notes, setNote }) => {
         <IconWrapper>
           <Icon src={AddIcon} onClick={addNoteHandler} />
           <Icon
-            src={ArrowDown}
+            src={toggleNoteList ? ArrowOut : ArrowIn}
             onClick={() => setToggleNoteList(!toggleNoteList)}
           />
           <Icon src={xMarkTransparent} onClick={deleteHandler} />
@@ -73,21 +75,26 @@ const InfoWrapper = styled.div`
   position: relative;
   display: flex;
   height: 10rem;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  border-radius: 10px;
+  margin: 1rem;
   width: 10%;
-  background: #f6f6f6;
   &.toggle {
     position: fixed;
     top: 0;
     height: 20%;
-    background-color: grey;
     z-index: 6;
   }
 `;
 const NoteInfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
-  width: 100%;
+  padding: 1rem;
+  /* height: 100%;
+  width: 100%; */
 `;
 const NoteHeader = styled.h2`
   font-size: 1.6rem;

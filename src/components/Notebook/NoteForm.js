@@ -34,6 +34,7 @@ const NoteForm = ({
               type="text"
             />
             <Icon
+              className={toggleNoteList && "toggle"}
               src={xMark}
               onClick={() => {
                 let index = copy.indexOf(item);
@@ -80,71 +81,84 @@ const NoteWrapper = styled.div`
     right: 0;
     position: fixed;
     z-index: 5;
+    padding: 5rem;
     flex-direction: column;
-    background: #f1f1f1;
+    align-items: center;
+    /* background: #f1f1f1; */
     width: 100%;
     transition: 0.5s ease;
     overflow-y: scroll;
   }
 `;
 const FormWrapper = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
-  margin-left: auto;
   flex-direction: column;
   justify-content: center;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  height: 10rem;
+  &.toggle {
+    margin-left: auto;
+    padding: 1rem;
+    width: 80%;
+    height: auto;
+  }
 `;
 const Icon = styled.img`
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  top: 0.5rem;
+  right: -0.5rem;
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 50%;
-  /* opacity: 0; */
   &:hover {
     transform: scale(1.2);
     transition: 0.5s ease;
   }
   &.toggle {
-    background: #ffffff;
-    opacity: 1;
-    transition: 0.5s ease;
+    right: 3rem;
+    pointer-events: all;
+    transition: 1s ease;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 `;
 const TitleInput = styled.input`
   border: none;
-  font-size: 2.4rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.6);
+  background: none;
+  border-bottom: 3px solid #01c915;
   &.toggle {
-    border-radius: 1rem;
-    width: 40%;
+    background: #e8e8e8;
+    font-size: 2.4rem;
+    width: 60%;
     transition: 0.5s ease;
-    box-shadow: -5px -5px 10px 5px rgb(255, 255, 255),
-      5px 5px 10px 5px rgb(163, 163, 163);
+    padding: 0.5rem;
   }
 `;
 
 const DescInput = styled.textarea`
   border: none;
-  background: rgba(255, 255, 255, 0.6);
-  font-size: 2.4rem;
+  background: none;
   margin-top: 0.5rem;
+  font-size: 1.6rem;
   margin-bottom: 0.5rem;
   overflow: hidden;
   resize: none;
   &.toggle {
-    border-radius: 1rem;
+    background: #e8e8e8;
+    font-size: 2.4rem;
+    padding: 1rem;
     overflow-y: scroll;
     margin-top: 2rem;
     width: 90%;
-    height: 23rem;
+    height: 25rem;
     transition: 0.5s ease;
-    box-shadow: -5px -5px 10px 5px rgb(255, 255, 255),
-      5px 5px 10px 5px rgb(163, 163, 163);
   }
 `;
 
@@ -153,9 +167,12 @@ const Wrap = styled.div`
   display: flex;
   width: 50%;
   align-items: center;
+  cursor: pointer;
   transition: 0.5s ease;
-  justify-content: center;
+  margin-left: 1rem;
   &.toggle {
+    margin-top: 2rem;
+    margin-left: 0;
     margin-top: 3rem;
     width: 95%;
     height: 30rem;

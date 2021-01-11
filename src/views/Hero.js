@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import HeroImg from "../images/Hero.png";
+import HeroImg2 from "../images/Hero.jpg";
+import HeroImg3 from "../images/Hero3.jpg";
 import AddIcon from "../images/AddIcon.svg";
 import TaskWrapper from "../components/Task/TaskWrapper";
 import NotebookWrapper from "../components/Notebook/NotebookWrapper";
@@ -39,7 +41,7 @@ const Hero = () => {
       </HeaderWrapper>
       <TaskWrapper />
       <NotebookWrapper />
-      <HeroImage src={HeroImg} />
+      <HeroImage src={HeroImg3} />
     </Wrapper>
   );
 };
@@ -49,7 +51,7 @@ const HeroImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.4;
+  opacity: 0.8;
   z-index: 1;
 `;
 

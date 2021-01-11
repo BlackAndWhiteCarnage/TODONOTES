@@ -76,7 +76,11 @@ const Wrapper = styled.div`
   &.toggle {
     display: flex;
     opacity: 1;
-    background-color: #f6f6f6;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    border-radius: 10px;
     width: 70%;
     height: 30rem;
     transition: 0.5s ease;
