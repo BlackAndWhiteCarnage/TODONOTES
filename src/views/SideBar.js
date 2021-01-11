@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <SideBarWrapper>
       <SideBar>
-        <LogoWrapper src={Logo} />
+        <LogoWrapper src={Logo} onClick={() => dispatch({ type: "BACK" })} />
         <List>
           <ListItem onClick={() => dispatch({ type: "NOTEBOOKSLISTS" })}>
             Notatniki
@@ -59,6 +59,7 @@ const ListItem = styled.li`
 `;
 
 const LogoWrapper = styled.img`
+  cursor: pointer;
   width: 7rem;
   height: 7rem;
   z-index: 2;

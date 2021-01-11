@@ -139,9 +139,10 @@ const Header = styled.h1`
   justify-content: center;
   text-align: center;
   margin: 10rem 0;
-  font-size: clamp(2.4rem, 2.5vw, 3.6rem);
+  font-size: clamp(3.4rem, 2.5vw, 3.6rem);
   display: flex;
   flex-direction: column;
+  color: white;
   line-height: 4rem;
   span {
     color: #01c915;

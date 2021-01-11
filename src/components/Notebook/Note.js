@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import xMarkTransparent from "../../images/X-Mark-Transparent.svg";
-import ArrowDown from "../../images/Arrow-down.svg";
 import ArrowIn from "../../images/arrow-in.svg";
 import ArrowOut from "../../images/arrow-out.svg";
 import AddIcon from "../../images/AddIcon.svg";
@@ -12,6 +11,7 @@ const Note = ({ title, description, note, notes, setNote }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputDesc, setInputDesc] = useState("");
   const [copy, setCopy] = useState(notes.notesItems);
+  const [deleteInf, setDeleteInf] = useState(false);
 
   const deleteHandler = () => {
     setNote(note.filter((el) => el.id !== notes.id));
@@ -46,9 +46,20 @@ const Note = ({ title, description, note, notes, setNote }) => {
           <Icon src={AddIcon} onClick={addNoteHandler} />
           <Icon
             src={toggleNoteList ? ArrowOut : ArrowIn}
-            onClick={() => setToggleNoteList(!toggleNoteList)}
+            onClick={() => {
+              copy.length > 0
+                ? setToggleNoteList(!toggleNoteList)
+                : setToggleNoteList(false);
+            }}
           />
-          <Icon src={xMarkTransparent} onClick={deleteHandler} />
+          <Icon
+            src={xMarkTransparent}
+            onClick={() => setDeleteInf(!deleteInf)}
+          />
+          <DeleteInfo className={deleteInf && "toggle"}>
+            <Btn onClick={deleteHandler}>Usuń</Btn>
+            <Btn onClick={() => setDeleteInf(false)}>Anuluj</Btn>
+          </DeleteInfo>
         </IconWrapper>
       </InfoWrapper>
       <>
@@ -87,14 +98,17 @@ const InfoWrapper = styled.div`
     top: 0;
     height: 20%;
     z-index: 6;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    border-radius: 10px;
   }
 `;
 const NoteInfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
-  /* height: 100%;
-  width: 100%; */
 `;
 const NoteHeader = styled.h2`
   font-size: 1.6rem;
@@ -127,6 +141,43 @@ const Icon = styled.img`
   }
   &.checked {
     background: #01c915;
+  }
+`;
+const DeleteInfo = styled.div`
+  display: none;
+  &.toggle {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+  }
+`;
+const Btn = styled.button`
+  width: 101%;
+  height: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 2.4rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transition: 0.5s ease;
+    &:nth-child(1) {
+      color: red;
+    }
+    &:nth-child(2) {
+      color: #01c915;
+    }
   }
 `;
 

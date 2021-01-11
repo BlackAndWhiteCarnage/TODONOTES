@@ -78,13 +78,13 @@ const NoteWrapper = styled.div`
     top: 0;
     left: 0;
     bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
     right: 0;
     position: fixed;
     z-index: 5;
     padding: 5rem;
     flex-direction: column;
     align-items: center;
-    /* background: #f1f1f1; */
     width: 100%;
     transition: 0.5s ease;
     overflow-y: scroll;
@@ -171,9 +171,9 @@ const Wrap = styled.div`
   transition: 0.5s ease;
   margin-left: 1rem;
   &.toggle {
-    margin-top: 2rem;
     margin-left: 0;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
     width: 95%;
     height: 30rem;
     transition: 0.5s ease;
