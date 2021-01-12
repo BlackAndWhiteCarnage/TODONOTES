@@ -21,6 +21,10 @@ const ButtonWrapper = styled.button`
     color: #01c915;
     transition: 0.5s ease;
   }
+  @media (max-width: 820px) {
+    width: 8rem;
+    font-size: 1.6rem;
+  }
 `;
 
 export default Button;

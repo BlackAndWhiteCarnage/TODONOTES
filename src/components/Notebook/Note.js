@@ -40,7 +40,7 @@ const Note = ({ title, description, note, notes, setNote }) => {
         <NoteInfoWrapper>
           <NoteHeader>{title}</NoteHeader>
           <NoteDesc>{description}</NoteDesc>
-          <h1>{copy.length}</h1>
+          <h1>Ilość notatek: {copy.length}</h1>
         </NoteInfoWrapper>
         <IconWrapper>
           <Icon src={AddIcon} onClick={addNoteHandler} />
@@ -92,33 +92,48 @@ const InfoWrapper = styled.div`
   -webkit-backdrop-filter: blur(3.5px);
   border-radius: 10px;
   margin: 1rem;
-  width: 10%;
+  width: 20%;
   &.toggle {
     position: fixed;
+    width: 13%;
+    transition: 0.5s ease;
     top: 0;
-    height: 20%;
+    height: 30%;
     z-index: 6;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
     border-radius: 10px;
+    @media screen and (max-width: 820px) {
+      width: 90%;
+      height: 25%;
+      margin: 0;
+    }
+  }
+  @media screen and (max-width: 820px) {
+    width: 100%;
   }
 `;
 const NoteInfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
+  overflow: hidden;
 `;
-const NoteHeader = styled.h2`
+const NoteHeader = styled.h3`
   font-size: 1.6rem;
   font-weight: bold;
-  width: 100%;
+  width: 80%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
-const NoteDesc = styled.h3`
+const NoteDesc = styled.p`
   font-size: 1.6rem;
   font-weight: 400;
-  width: 100%;
+  width: 70%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 const IconWrapper = styled.div`
   position: absolute;
@@ -128,6 +143,8 @@ const IconWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem;
 `;
 const Icon = styled.img`
   width: 2.5rem;
@@ -153,14 +170,16 @@ const DeleteInfo = styled.div`
     flex-direction: column;
     left: 50%;
     top: 50%;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
   }
 `;
 const Btn = styled.button`
-  width: 101%;
+  width: 100%;
   height: 50%;
   background: rgba(0, 0, 0, 0.5);
   color: #fff;

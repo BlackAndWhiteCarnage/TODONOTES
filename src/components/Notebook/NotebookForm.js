@@ -64,7 +64,7 @@ const TaskForm = ({
 
 const TitleInput = styled.input`
   border: none;
-  width: 90%;
+  width: 95%;
   height: 2rem;
   margin: auto;
   font-size: 1.6rem;
@@ -74,7 +74,7 @@ const TitleInput = styled.input`
 
 const DescriptionInput = styled.textarea`
   border: none;
-  width: 90%;
+  width: 95%;
   height: 8rem;
   margin: auto;
   font-size: 2rem;

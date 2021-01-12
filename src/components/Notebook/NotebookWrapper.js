@@ -57,20 +57,16 @@ const Wrapper = styled.div`
   transition: 0.5s ease;
   position: absolute;
   pointer-events: none;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -40%);
   z-index: 5;
   transition: 0.5s ease;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-around;
-  button {
-    margin: 0 4rem 1rem auto;
-  }
   label {
     font-size: 2.4rem;
-    margin: auto 0 0 4rem;
     cursor: pointer;
   }
   &.toggle {
@@ -85,6 +81,13 @@ const Wrapper = styled.div`
     height: 30rem;
     transition: 0.5s ease;
     pointer-events: all;
+    @media screen and (max-width: 820px) {
+      width: 95%;
+      label {
+        width: 95%;
+        margin-top: 2rem;
+      }
+    }
   }
 `;
 

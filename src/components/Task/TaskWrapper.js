@@ -65,8 +65,8 @@ const Wrapper = styled.div`
   height: 15rem;
   label {
     font-size: 2.4rem;
-    margin: auto 0 0 4rem;
     cursor: pointer;
+    margin-top: 2rem;
   }
   input {
     border: none;
@@ -77,12 +77,10 @@ const Wrapper = styled.div`
     border-bottom: 3px solid #01c915;
     padding: 1rem 0;
   }
-  button {
-    margin: 0 4rem 1rem auto;
-  }
   &.toggle {
     opacity: 1;
     display: flex;
+    align-items: center;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(3.5px);
@@ -91,6 +89,13 @@ const Wrapper = styled.div`
     width: 70%;
     transition: 0.5s ease;
     pointer-events: all;
+    @media screen and (max-width: 820px) {
+      height: 25rem;
+      width: 95%;
+      label {
+        margin-top: 5rem;
+      }
+    }
   }
 `;
 
@@ -113,6 +118,7 @@ const TasksWrapper = styled.div`
   pointer-events: none;
   &.toggle {
     display: flex;
+    align-items: center;
     padding: 4rem 0;
     opacity: 1;
     position: absolute;
@@ -124,7 +130,6 @@ const TasksWrapper = styled.div`
     transition: 0.5s ease;
     flex-direction: column;
     overflow-y: scroll;
-    align-items: center;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(3.5px);
@@ -133,6 +138,12 @@ const TasksWrapper = styled.div`
     width: 60%;
     height: 40rem;
     transition: 0.5s ease;
+    @media screen and (max-width: 820px) {
+      top: 45%;
+      width: 95%;
+      height: 80%;
+      align-items: center;
+    }
   }
 `;
 

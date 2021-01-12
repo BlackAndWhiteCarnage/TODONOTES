@@ -38,9 +38,6 @@ const Task = ({ text, tasks, task, setTasks }) => {
           <Icon src={InfoIcon} onClick={() => setToggle(!toggle)} />
           <Icon src={xMarkTransparent} onClick={deleteHandler} />
         </IconWrapper>
-        <Div className={toggle && "toggle"}>
-          <Button />
-        </Div>
       </Wrapper>
     </>
   );
@@ -64,27 +61,32 @@ const Wrapper = styled.div`
     height: 20rem;
     transition: 0.5s ease;
   }
-`;
-
-const TaskHeader = styled.h2`
-  margin-left: 1rem;
-  font-size: 1.6rem;
-  font-weight: 400;
-`;
-
-const Div = styled.div`
-  display: none;
-  height: 20rem;
-  &.toggle {
-    display: block;
+  @media screen and (max-width: 820px) {
+    min-height: 10rem;
+    align-items: flex-start;
   }
 `;
 
+const TaskHeader = styled.h2`
+  display: block;
+  margin-left: 1rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  width: 70%;
+  word-wrap: break-word;
+  white-space: wrap;
+`;
+
 const IconWrapper = styled.div`
-  width: 20%;
+  min-width: 10rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  @media screen and (max-width: 820px) {
+    flex-direction: column;
+    height: 100%;
+    min-width: 5rem;
+  }
 `;
 
 const Icon = styled.img`

@@ -27,6 +27,7 @@ const Info = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
+  padding: 1rem;
   justify-content: center;
 `;
 

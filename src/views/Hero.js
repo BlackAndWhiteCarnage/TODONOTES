@@ -66,9 +66,8 @@ const HeaderWrapper = styled.div`
   &.toggle {
     display: none;
   }
-  @media (max-width: 820px) {
-    width: 100%;
-    margin: auto;
+  @media screen and (max-width: 820px) {
+    margin-bottom: 10rem;
   }
 `;
 
@@ -92,8 +91,8 @@ const MainIcon = styled.img`
     transition: 0.5s ease;
   }
   @media (max-width: 820px) {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
   }
 `;
 
@@ -107,6 +106,11 @@ const ButtonsWrapper = styled.div`
     pointer-events: all;
     opacity: 1;
   }
+  @media screen and (max-width: 820px) {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -118,7 +122,6 @@ const IconWrapper = styled.div`
     display: block;
     width: 5rem;
     height: 5rem;
-    font-size: 5rem;
     position: absolute;
     border-radius: 50%;
     animation: Pulse ease 4s infinite;
@@ -139,7 +142,7 @@ const Header = styled.h1`
   justify-content: center;
   text-align: center;
   margin: 10rem 0;
-  font-size: clamp(3.4rem, 2.5vw, 3.6rem);
+  font-size: 3.6rem;
   display: flex;
   flex-direction: column;
   color: white;
@@ -147,6 +150,11 @@ const Header = styled.h1`
   span {
     color: #01c915;
     font-family: "Montserrat", sans-serif;
+  }
+  @media screen and (max-width: 820px) {
+    margin: 5rem 0;
+    font-size: 2.4rem;
+    line-height: 3rem;
   }
 `;
 

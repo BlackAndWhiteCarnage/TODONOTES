@@ -33,9 +33,6 @@ const Modal = () => {
         >
           Nowe <span>zadanie</span>
         </Option>
-        <Option className={showOptions && "toggle"}>
-          Nowa <span>notatka</span>
-        </Option>
       </Options>
     </ModalWrapper>
   );

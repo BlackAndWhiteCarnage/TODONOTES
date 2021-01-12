@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
 
@@ -8,7 +8,6 @@ const NoteForm = ({
   setInputTitle,
   setInputDesc,
   toggleNoteList,
-  setToggleNoteList,
 }) => {
   return (
     <NoteWrapper className={toggleNoteList && "toggle"}>
@@ -51,25 +50,12 @@ const NoteForm = ({
               }}
             />
           </FormWrapper>
-          {/* <Options className={toggleNoteList && "toggle"}> */}
-          {/* </Options> */}
         </Wrap>
       ))}
     </NoteWrapper>
   );
 };
 
-// const Options = styled.div`
-//   position: absolute;
-//   right: 10%;
-//   opacity: 0;
-//   transition: 0.5s ease;
-//   &.toggle {
-//     background: #ffffff;
-//     opacity: 1;
-//     transition: 0.5s ease;
-//   }
-// `;
 const NoteWrapper = styled.div`
   width: 30%;
   transition: 0.5s ease;
@@ -88,6 +74,12 @@ const NoteWrapper = styled.div`
     width: 100%;
     transition: 0.5s ease;
     overflow-y: scroll;
+    @media screen and (max-width: 820px) {
+      padding: 0;
+    }
+  }
+  @media screen and (max-width: 820px) {
+    width: 0;
   }
 `;
 const FormWrapper = styled.div`
@@ -104,6 +96,10 @@ const FormWrapper = styled.div`
     padding: 1rem;
     width: 80%;
     height: auto;
+    @media screen and (max-width: 820px) {
+      width: 100%;
+      padding: 1rem;
+    }
   }
 `;
 const Icon = styled.img`
@@ -125,6 +121,14 @@ const Icon = styled.img`
     transition: 1s ease;
     width: 2.5rem;
     height: 2.5rem;
+    @media screen and (max-width: 820px) {
+      width: 2rem;
+      height: 2rem;
+      right: 2rem;
+    }
+  }
+  @media screen and (max-width: 820px) {
+    width: 0;
   }
 `;
 const TitleInput = styled.input`
@@ -134,11 +138,14 @@ const TitleInput = styled.input`
   background: none;
   border-bottom: 3px solid #01c915;
   &.toggle {
-    background: #e8e8e8;
+    background: transparent;
     font-size: 2.4rem;
     width: 60%;
     transition: 0.5s ease;
     padding: 0.5rem;
+    @media screen and (max-width: 820px) {
+      width: 90%;
+    }
   }
 `;
 
@@ -151,14 +158,17 @@ const DescInput = styled.textarea`
   overflow: hidden;
   resize: none;
   &.toggle {
-    background: #e8e8e8;
+    background: #f1f1f1;
     font-size: 2.4rem;
     padding: 1rem;
     overflow-y: scroll;
     margin-top: 2rem;
-    width: 90%;
+    width: 100%;
     height: 25rem;
     transition: 0.5s ease;
+    @media screen and (max-width: 820px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -167,7 +177,6 @@ const Wrap = styled.div`
   display: flex;
   width: 50%;
   align-items: center;
-  cursor: pointer;
   transition: 0.5s ease;
   margin-left: 1rem;
   &.toggle {
@@ -177,6 +186,13 @@ const Wrap = styled.div`
     width: 95%;
     height: 30rem;
     transition: 0.5s ease;
+    @media screen and (max-width: 820px) {
+      position: relative;
+      height: auto;
+      top: 25%;
+      width: 100%;
+      margin: 1rem;
+    }
   }
 `;
 
