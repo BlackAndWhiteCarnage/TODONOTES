@@ -70,6 +70,9 @@ const TitleInput = styled.input`
   font-size: 1.6rem;
   border-bottom: 3px solid #01c915;
   padding: 1rem 0;
+  @media screen and (max-width: 820px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const DescriptionInput = styled.textarea`
@@ -80,6 +83,9 @@ const DescriptionInput = styled.textarea`
   font-size: 2rem;
   border-bottom: 3px solid #01c915;
   resize: none;
+  @media screen and (max-width: 820px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export default TaskForm;

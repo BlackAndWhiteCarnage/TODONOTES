@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import xMark from "../../images/X-Mark.svg";
+import BackIcon from "../../images/Back.svg";
 import NotebookList from "./NotebookList";
 import NotebookForm from "./NotebookForm";
 
@@ -42,7 +42,7 @@ const NotebookWrapper = () => {
           inputDesc={inputDesc}
           setInputDesc={setInputDesc}
         />
-        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
+        <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
       </Wrapper>
       <NotebooksListWrapper className={toggle === 4 && "toggle"}>
         <NotebookList note={note} setNote={setNote} />
@@ -95,11 +95,17 @@ const Icon = styled.img`
   position: absolute;
   right: 1rem;
   top: 1rem;
+  width: 2.5rem;
   cursor: pointer;
   transition: 0.5s ease;
   &:hover {
     transition: 0.5s ease;
     transform: scale(1.2) rotate(360deg);
+  }
+  @media (max-width: 820px) {
+    width: 2rem;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 `;
 

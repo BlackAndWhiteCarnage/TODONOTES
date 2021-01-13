@@ -37,12 +37,12 @@ const Note = ({ title, description, note, notes, setNote }) => {
   return (
     <Wrapper>
       <InfoWrapper className={toggleNoteList && "toggle"}>
-        <NoteInfoWrapper>
+        <NoteInfoWrapper className={toggleNoteList && "toggle"}>
           <NoteHeader>{title}</NoteHeader>
           <NoteDesc>{description}</NoteDesc>
           <h1>Ilość notatek: {copy.length}</h1>
         </NoteInfoWrapper>
-        <IconWrapper>
+        <IconWrapper className={toggleNoteList && "toggle"}>
           <Icon src={AddIcon} onClick={addNoteHandler} />
           <Icon
             src={toggleNoteList ? ArrowOut : ArrowIn}
@@ -55,6 +55,7 @@ const Note = ({ title, description, note, notes, setNote }) => {
           <Icon
             src={xMarkTransparent}
             onClick={() => setDeleteInf(!deleteInf)}
+            className={toggleNoteList && "deleteBtn"}
           />
           <DeleteInfo className={deleteInf && "toggle"}>
             <Btn onClick={deleteHandler}>Usuń</Btn>
@@ -81,13 +82,19 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   transition: 0.5s ease;
+  &:first-child {
+    margin-top: 4rem;
+  }
+  &:last-child {
+    margin-bottom: 4rem;
+  }
 `;
 const InfoWrapper = styled.div`
   position: relative;
   display: flex;
   height: 10rem;
   background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
   backdrop-filter: blur(3.5px);
   -webkit-backdrop-filter: blur(3.5px);
   border-radius: 10px;
@@ -107,8 +114,9 @@ const InfoWrapper = styled.div`
     border-radius: 10px;
     @media screen and (max-width: 820px) {
       width: 90%;
-      height: 25%;
+      height: 18%;
       margin: 0;
+      z-index: 6;
     }
   }
   @media screen and (max-width: 820px) {
@@ -120,6 +128,11 @@ const NoteInfoWrapper = styled.div`
   flex-wrap: wrap;
   padding: 1rem;
   overflow: hidden;
+  &.toggle {
+    @media screen and (max-width: 820px) {
+      display: none;
+    }
+  }
 `;
 const NoteHeader = styled.h3`
   font-size: 1.6rem;
@@ -145,6 +158,15 @@ const IconWrapper = styled.div`
   justify-content: space-around;
   background: rgba(255, 255, 255, 0.8);
   padding: 0.5rem;
+  &.toggle {
+    @media screen and (max-width: 820px) {
+      position: relative;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: flex-end;
+    }
+  }
 `;
 const Icon = styled.img`
   width: 2.5rem;
@@ -158,6 +180,12 @@ const Icon = styled.img`
   }
   &.checked {
     background: #01c915;
+  }
+
+  &.deleteBtn {
+    @media screen and (max-width: 820px) {
+      display: none;
+    }
   }
 `;
 const DeleteInfo = styled.div`
@@ -176,6 +204,9 @@ const DeleteInfo = styled.div`
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.8);
     overflow: hidden;
+    /* @media screen and (max-width: 820px) {
+      display: none;
+    } */
   }
 `;
 const Btn = styled.button`

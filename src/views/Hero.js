@@ -1,7 +1,5 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import HeroImg from "../images/Hero.png";
-import HeroImg2 from "../images/Hero.jpg";
 import HeroImg3 from "../images/Hero3.jpg";
 import AddIcon from "../images/AddIcon.svg";
 import TaskWrapper from "../components/Task/TaskWrapper";
@@ -14,28 +12,41 @@ const Hero = () => {
   const toggle = useSelector((state) => state.toggle);
   const dispatch = useDispatch();
   const [toggleOptions, setToggleOptions] = useState(false);
-  const textToggle = useRef(String);
-  const chooseOption = () => {
-    setToggleOptions(!toggleOptions);
-  };
+  let [text, setText] = useState(0);
+
+  setTimeout(() => {
+    setText(text < 2 ? text + 1 : (text = 0));
+  }, 3000);
 
   return (
     <Wrapper>
       <HeaderWrapper className={toggle && "toggle"}>
         <Header>
-          Dodawaj Jednym Kliknięciem <span ref={textToggle}>zadania</span>
+          Dodawaj.{" "}
+          <span className={text === 0 ? "toggle" : "toggleOut"}>notatki</span>
+          <span className={text === 1 ? "toggle" : "toggleOut"}>zadania</span>
+          <span className={text === 2 ? "toggle" : "toggleOut"}>notatniki</span>
         </Header>
         <IconWrapper>
-          <MainIcon src={AddIcon} onClick={chooseOption} />
+          <MainIcon
+            src={AddIcon}
+            onClick={() => setToggleOptions(!toggleOptions)}
+          />
         </IconWrapper>
         <ButtonsWrapper className={toggleOptions && "toggle"}>
           <Button
             value={"Notatnik"}
-            click={() => dispatch({ type: "NOTEBOOKTOGGLE" })}
+            click={() => {
+              dispatch({ type: "NOTEBOOKTOGGLE" });
+              setToggleOptions(false);
+            }}
           />
           <Button
             value={"Zadanie"}
-            click={() => dispatch({ type: "TASKTOGGLE" })}
+            click={() => {
+              dispatch({ type: "TASKTOGGLE" });
+              setToggleOptions(false);
+            }}
           />
         </ButtonsWrapper>
       </HeaderWrapper>
@@ -48,26 +59,28 @@ const Hero = () => {
 
 const HeroImage = styled.img`
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   opacity: 0.8;
   z-index: 1;
 `;
 
 const HeaderWrapper = styled.div`
-  width: 100%;
+  width: 40%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 2;
+  border-radius: 10px;
   &.toggle {
     display: none;
   }
-  @media screen and (max-width: 820px) {
-    margin-bottom: 10rem;
+  @media (max-width: 820px) {
+    width: 90%;
+    height: 80%;
   }
 `;
 
@@ -80,8 +93,8 @@ const Wrapper = styled.div`
 `;
 
 const MainIcon = styled.img`
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   cursor: pointer;
   transition: 0.5s ease;
   z-index: 2;
@@ -93,6 +106,7 @@ const MainIcon = styled.img`
   @media (max-width: 820px) {
     width: 3rem;
     height: 3rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -111,6 +125,9 @@ const ButtonsWrapper = styled.div`
     align-items: center;
     justify-content: center;
   }
+  button {
+    margin: 1rem;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -120,8 +137,8 @@ const IconWrapper = styled.div`
     content: "";
     position: absolute;
     display: block;
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
     border-radius: 50%;
     animation: Pulse ease 4s infinite;
@@ -138,6 +155,7 @@ const IconWrapper = styled.div`
 `;
 
 const Header = styled.h1`
+  position: relative;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -145,9 +163,19 @@ const Header = styled.h1`
   font-size: 3.6rem;
   display: flex;
   flex-direction: column;
-  color: white;
   line-height: 4rem;
   span {
+    position: absolute;
+    bottom: -4rem;
+    &.toggle {
+      opacity: 1;
+      transition: 0.5s ease;
+    }
+    &.toggleOut {
+      transition: 0.5s ease;
+      opacity: 0;
+      bottom: -10rem;
+    }
     color: #01c915;
     font-family: "Montserrat", sans-serif;
   }

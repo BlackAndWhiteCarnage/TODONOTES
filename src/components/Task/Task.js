@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CheckIcon from "../../images/CheckIcon.svg";
 import InfoIcon from "../../images/InfoIcon.svg";
-import xMarkTransparent from "../../images/X-Mark-Transparent.svg";
-import Button from "../Button";
+import xMark from "../../images/X-Mark.svg";
 
 const Task = ({ text, tasks, task, setTasks }) => {
   const [toggle, setToggle] = useState(false);
@@ -36,7 +35,7 @@ const Task = ({ text, tasks, task, setTasks }) => {
             className={task.completed && "checked"}
           />
           <Icon src={InfoIcon} onClick={() => setToggle(!toggle)} />
-          <Icon src={xMarkTransparent} onClick={deleteHandler} />
+          <Icon src={xMark} onClick={deleteHandler} />
         </IconWrapper>
       </Wrapper>
     </>
@@ -44,7 +43,7 @@ const Task = ({ text, tasks, task, setTasks }) => {
 };
 
 const Wrapper = styled.div`
-  width: 95%;
+  width: 90%;
   min-height: 4rem;
   margin: 1rem 0;
   background: #fff;
@@ -53,6 +52,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   transition: 0.5s ease;
   overflow: hidden;
+  border-radius: 10px;
   &.checked {
     background: #dfdfdf;
     transition: 0.5s ease;

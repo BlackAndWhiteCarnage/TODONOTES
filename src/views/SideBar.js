@@ -28,7 +28,12 @@ const SideBarWrapper = styled.div`
   background: #fff;
   z-index: 3;
   @media (max-width: 820px) {
-    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+    width: 100%;
   }
 `;
 
@@ -39,11 +44,24 @@ const SideBar = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 2;
+  @media (max-width: 820px) {
+    width: 95%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const List = styled.ul`
   list-style: none;
   font-weight: bold;
+  @media (max-width: 820px) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 `;
 
 const ListItem = styled.li`
@@ -56,6 +74,11 @@ const ListItem = styled.li`
     color: #01c915;
     transition: 0.2s ease;
   }
+  @media (max-width: 820px) {
+    margin: 0;
+    margin-left: 1rem;
+    padding: 0.5rem 0.1rem;
+  }
 `;
 
 const LogoWrapper = styled.img`
@@ -63,6 +86,10 @@ const LogoWrapper = styled.img`
   width: 7rem;
   height: 7rem;
   z-index: 2;
+  @media (max-width: 820px) {
+    width: 5rem;
+    height: 100%;
+  }
 `;
 
 export default Sidebar;

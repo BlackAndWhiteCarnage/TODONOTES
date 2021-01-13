@@ -3,6 +3,8 @@ import styled from "styled-components";
 import DarkModeIcon from "../images/DarkModeIcon.svg";
 import ColorIcon from "../images/ColorIcon.svg";
 import AddIcon from "../images/AddIcon.svg";
+import HomeIcon from "../images/Home.svg";
+import BackIcon from "../images/Back.svg";
 import { useDispatch } from "react-redux";
 
 const Modal = () => {
@@ -12,28 +14,45 @@ const Modal = () => {
 
   return (
     <ModalWrapper>
+      <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
       <Icon src={ColorIcon} onClick={() => setShowColors(!showColors)} />
       <Colors className={showColors && "toggle"}>
-        <Color className={showColors && "toggle purple"} />
-        <Color className={showColors && "toggle yellow"} />
-        <Color className={showColors && "toggle green"} />
+        <Color
+          className={showColors && "toggle purple"}
+          onClick={() => setShowColors(false)}
+        />
+        <Color
+          className={showColors && "toggle yellow"}
+          onClick={() => setShowColors(false)}
+        />
+        <Color
+          className={showColors && "toggle green"}
+          onClick={() => setShowColors(false)}
+        />
       </Colors>
       <Icon src={DarkModeIcon} />
-      <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
       <Options className={showOptions && "toggle"}>
         <Option
           className={showOptions && "toggle"}
-          onClick={() => dispatch({ type: "NOTEBOOKTOGGLE" })}
+          onClick={() => {
+            dispatch({ type: "NOTEBOOKTOGGLE" });
+            setShowOptions(false);
+          }}
         >
-          Nowy <span>notatnik</span>
+          <span>notatnik</span>
         </Option>
         <Option
           className={showOptions && "toggle"}
-          onClick={() => dispatch({ type: "TASKTOGGLE" })}
+          onClick={() => {
+            dispatch({ type: "TASKTOGGLE" });
+            setShowOptions(false);
+          }}
         >
-          Nowe <span>zadanie</span>
+          <span>zadanie</span>
         </Option>
+        <Icon src={BackIcon} onClick={() => setShowOptions(false)} />
       </Options>
+      <Icon src={HomeIcon} onClick={() => dispatch({ type: "BACK" })} />{" "}
     </ModalWrapper>
   );
 };
@@ -50,11 +69,13 @@ const ModalWrapper = styled.div`
   justify-content: space-around;
   z-index: 3;
   box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 0 10px;
   &.toggle {
     width: 20rem;
   }
   @media (max-width: 820px) {
-    display: none;
+    width: 100%;
+    z-index: 20;
   }
 `;
 
@@ -78,8 +99,17 @@ const Options = styled.div`
   justify-content: space-around;
   &.toggle {
     display: flex;
-
-    width: 40rem;
+    width: 20rem;
+    @media (max-width: 820px) {
+      font-size: 1.2rem;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 22;
+      display: flex;
+      align-items: center;
+    }
   }
 `;
 
@@ -110,6 +140,10 @@ const Color = styled.div`
     width: 2.5rem;
     height: 2.5rem;
     transition: 0.5s ease;
+    @media (max-width: 820px) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
   &.purple {
     background: #dc009e;
@@ -134,6 +168,9 @@ const Icon = styled.img`
   z-index: 3;
   &:hover {
     transform: scale(1.2);
+  }
+  @media (max-width: 820px) {
+    width: 2rem;
   }
 `;
 

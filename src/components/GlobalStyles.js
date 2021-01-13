@@ -14,9 +14,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
         font-size: 62.5%;
         overflow: hidden;
+        /* --webkit-overflow-scrolling: touch; */
     }
     ::-webkit-scrollbar {
-    width: 1.5rem;
+    width: 1rem;
     }
     ::-webkit-scrollbar-track {
     width: 1rem;
@@ -27,6 +28,11 @@ const GlobalStyles = createGlobalStyle`
     }
     ::-webkit-scrollbar-thumb:hover {
     background: #00E016;
+    }
+    @media screen and (max-width: 680px) {
+        ::-webkit-scrollbar {
+    width: .5rem;
+    }
     }
 `;
 

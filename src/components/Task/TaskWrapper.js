@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import xMark from "../../images/X-Mark.svg";
+import { useSelector, useDispatch } from "react-redux";
+import BackIcon from "../../images/Back.svg";
 import TasksList from "./TasksList";
 import TaskForm from "./TaskForm";
 
@@ -39,10 +38,10 @@ const TaskWrapper = () => {
           inputText={inputText}
           setInputText={setInputText}
         />
-        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
+        <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
       </Wrapper>
       <TasksWrapper className={toggle === 3 && "toggle"}>
-        <Icon src={xMark} onClick={() => dispatch({ type: "BACK" })} />
+        <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
         <TasksList tasks={tasks} setTasks={setTasks} />
       </TasksWrapper>
     </>
@@ -67,15 +66,6 @@ const Wrapper = styled.div`
     font-size: 2.4rem;
     cursor: pointer;
     margin-top: 2rem;
-  }
-  input {
-    border: none;
-    width: 90%;
-    height: 2rem;
-    margin: auto;
-    font-size: 1.6rem;
-    border-bottom: 3px solid #01c915;
-    padding: 1rem 0;
   }
   &.toggle {
     opacity: 1;
@@ -105,9 +95,15 @@ const Icon = styled.img`
   top: 1rem;
   cursor: pointer;
   transition: 0.5s ease;
+  width: 2.5rem;
   &:hover {
     transition: 0.5s ease;
     transform: scale(1.2) rotate(360deg);
+  }
+  @media (max-width: 820px) {
+    width: 2rem;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 `;
 
@@ -139,11 +135,14 @@ const TasksWrapper = styled.div`
     height: 40rem;
     transition: 0.5s ease;
     @media screen and (max-width: 820px) {
-      top: 45%;
+      top: 50%;
       width: 95%;
       height: 80%;
       align-items: center;
     }
+  }
+  @media screen and (max-width: 820px) {
+    display: none;
   }
 `;
 

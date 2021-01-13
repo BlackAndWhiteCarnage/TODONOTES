@@ -28,7 +28,7 @@ const NotebookList = ({ note, setNote }) => {
 
 const NotebookListWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   position: relative;
 `;
@@ -44,6 +44,9 @@ const Info = styled.p`
   span {
     color: #01c915;
   }
+  @media screen and (max-width: 820px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -52,6 +55,9 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   overflow-y: scroll;
+  @media screen and (max-width: 820px) {
+    overflow-x: hidden;
+  }
 `;
 
 export default NotebookList;

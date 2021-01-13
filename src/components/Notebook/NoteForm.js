@@ -57,7 +57,7 @@ const NoteForm = ({
 };
 
 const NoteWrapper = styled.div`
-  width: 30%;
+  width: 50%;
   transition: 0.5s ease;
   display: flex;
   &.toggle {
@@ -99,6 +99,7 @@ const FormWrapper = styled.div`
     @media screen and (max-width: 820px) {
       width: 100%;
       padding: 1rem;
+      margin-right: 1rem;
     }
   }
 `;
@@ -145,6 +146,7 @@ const TitleInput = styled.input`
     padding: 0.5rem;
     @media screen and (max-width: 820px) {
       width: 90%;
+      font-size: 1.6rem;
     }
   }
 `;
@@ -168,6 +170,8 @@ const DescInput = styled.textarea`
     transition: 0.5s ease;
     @media screen and (max-width: 820px) {
       width: 100%;
+      font-size: 1.2rem;
+      padding: 0;
     }
   }
 `;
