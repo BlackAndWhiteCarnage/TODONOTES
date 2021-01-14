@@ -39,7 +39,6 @@ const Info = styled.p`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
   font-weight: bold;
   span {
     color: #01c915;

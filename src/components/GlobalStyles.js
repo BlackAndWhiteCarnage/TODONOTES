@@ -5,16 +5,17 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        &:hover{
+            transform: none;
+        }
     }
     html{
         overflow: hidden;
-
     }
     body{
         font-family: 'Montserrat', sans-serif;
         font-size: 62.5%;
         overflow: hidden;
-        /* --webkit-overflow-scrolling: touch; */
     }
     ::-webkit-scrollbar {
     width: 1rem;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
 
@@ -8,6 +8,8 @@ const NoteForm = ({
   setInputTitle,
   setInputDesc,
   toggleNoteList,
+  setNote,
+  note,
 }) => {
   return (
     <NoteWrapper className={toggleNoteList && "toggle"}>
@@ -21,6 +23,13 @@ const NoteForm = ({
               onChange={(e) => {
                 item.noteTitle = e.target.value;
                 setInputTitle(e.target.value);
+                setNote(
+                  note.map((el) => {
+                    return {
+                      ...el,
+                    };
+                  })
+                );
               }}
             />
             <DescInput
@@ -29,6 +38,13 @@ const NoteForm = ({
               onChange={(e) => {
                 item.noteDesc = e.target.value;
                 setInputDesc(e.target.value);
+                setNote(
+                  note.map((el) => {
+                    return {
+                      ...el,
+                    };
+                  })
+                );
               }}
               type="text"
             />
@@ -44,6 +60,13 @@ const NoteForm = ({
                   copy.map((x) => {
                     return {
                       ...x,
+                    };
+                  })
+                );
+                setNote(
+                  note.map((el) => {
+                    return {
+                      ...el,
                     };
                   })
                 );
@@ -83,6 +106,7 @@ const NoteWrapper = styled.div`
   }
 `;
 const FormWrapper = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -96,6 +120,9 @@ const FormWrapper = styled.div`
     padding: 1rem;
     width: 80%;
     height: auto;
+    &:last-child {
+      margin-bottom: 5rem;
+    }
     @media screen and (max-width: 820px) {
       width: 100%;
       padding: 1rem;
@@ -106,7 +133,7 @@ const FormWrapper = styled.div`
 const Icon = styled.img`
   position: absolute;
   top: 0.5rem;
-  right: -0.5rem;
+  right: 0.5rem;
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -117,9 +144,9 @@ const Icon = styled.img`
     transition: 0.5s ease;
   }
   &.toggle {
-    right: 3rem;
+    top: 2rem;
+    right: 2rem;
     pointer-events: all;
-    transition: 1s ease;
     width: 2.5rem;
     height: 2.5rem;
     @media screen and (max-width: 820px) {

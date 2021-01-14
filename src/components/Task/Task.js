@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CheckIcon from "../../images/CheckIcon.svg";
+import CheckedIcon from "../../images/CheckedIcon.svg";
+import UncheckedIcon from "../../images/UncheckedIcon.svg";
 import InfoIcon from "../../images/InfoIcon.svg";
 import xMark from "../../images/X-Mark.svg";
 
@@ -30,9 +31,8 @@ const Task = ({ text, tasks, task, setTasks }) => {
         <TaskHeader>{text}</TaskHeader>
         <IconWrapper>
           <Icon
-            src={CheckIcon}
+            src={task.completed ? CheckedIcon : UncheckedIcon}
             onClick={completeHandler}
-            className={task.completed && "checked"}
           />
           <Icon src={InfoIcon} onClick={() => setToggle(!toggle)} />
           <Icon src={xMark} onClick={deleteHandler} />
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   border-radius: 10px;
   &.checked {
-    background: #dfdfdf;
+    background: rgba(255, 255, 255, 0.2);
     transition: 0.5s ease;
   }
   &.toggle {

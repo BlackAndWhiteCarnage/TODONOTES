@@ -14,22 +14,22 @@ const NotebookWrapper = () => {
   const [inputDesc, setInputDesc] = useState("");
   const [note, setNote] = useState([]);
 
-  // useEffect(() => {
-  //   getNotes();
-  // }, []);
+  useEffect(() => {
+    getNotebooks();
+  }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("notes", JSON.stringify(note));
-  // }, [note]);
+  useEffect(() => {
+    localStorage.setItem("notebooks", JSON.stringify(note));
+  }, [note]);
 
-  // const getNotes = () => {
-  //   if (localStorage.getItem("notes") === null) {
-  //     localStorage.setItem("notes", JSON.stringify([]));
-  //   } else {
-  //     let taskLocal = JSON.parse(localStorage.getItem("notes"));
-  //     setNote(taskLocal);
-  //   }
-  // };
+  const getNotebooks = () => {
+    if (localStorage.getItem("notebooks") === null) {
+      localStorage.setItem("notebooks", JSON.stringify([]));
+    } else {
+      let notebooksLocal = JSON.parse(localStorage.getItem("notebooks"));
+      setNote(notebooksLocal);
+    }
+  };
 
   return (
     <>
@@ -100,7 +100,7 @@ const Icon = styled.img`
   transition: 0.5s ease;
   &:hover {
     transition: 0.5s ease;
-    transform: scale(1.2) rotate(360deg);
+    transform: scale(1.2) rotate(-360deg);
   }
   @media (max-width: 820px) {
     width: 2rem;

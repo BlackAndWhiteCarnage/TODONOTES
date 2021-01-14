@@ -14,7 +14,7 @@ const Modal = () => {
 
   return (
     <ModalWrapper>
-      <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
+      <Icon src={HomeIcon} onClick={() => dispatch({ type: "BACK" })} />
       <Icon src={ColorIcon} onClick={() => setShowColors(!showColors)} />
       <Colors className={showColors && "toggle"}>
         <Color
@@ -31,6 +31,7 @@ const Modal = () => {
         />
       </Colors>
       <Icon src={DarkModeIcon} />
+      <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
       <Options className={showOptions && "toggle"}>
         <Option
           className={showOptions && "toggle"}
@@ -52,7 +53,6 @@ const Modal = () => {
         </Option>
         <Icon src={BackIcon} onClick={() => setShowOptions(false)} />
       </Options>
-      <Icon src={HomeIcon} onClick={() => dispatch({ type: "BACK" })} />{" "}
     </ModalWrapper>
   );
 };
@@ -76,6 +76,7 @@ const ModalWrapper = styled.div`
   @media (max-width: 820px) {
     width: 100%;
     z-index: 20;
+    border-radius: 0;
   }
 `;
 
@@ -168,6 +169,9 @@ const Icon = styled.img`
   z-index: 3;
   &:hover {
     transform: scale(1.2);
+
+    transition: 0.5s ease;
+    transform: scale(1.2) rotate(-360deg);
   }
   @media (max-width: 820px) {
     width: 2rem;

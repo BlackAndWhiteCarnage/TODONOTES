@@ -8,7 +8,7 @@ const Button = ({ value, click }) => {
 const ButtonWrapper = styled.button`
   width: 10rem;
   height: 3.5rem;
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  font-size: 2.4rem;
   font-weight: bold;
   border: none;
   margin: 1.5rem;

@@ -98,7 +98,7 @@ const Icon = styled.img`
   width: 2.5rem;
   &:hover {
     transition: 0.5s ease;
-    transform: scale(1.2) rotate(360deg);
+    transform: scale(1.2) rotate(-360deg);
   }
   @media (max-width: 820px) {
     width: 2rem;

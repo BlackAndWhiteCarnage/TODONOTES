@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import xMarkTransparent from "../../images/X-Mark-Transparent.svg";
+import xMark from "../../images/X-Mark.svg";
 import ArrowIn from "../../images/arrow-in.svg";
 import ArrowOut from "../../images/arrow-out.svg";
 import AddIcon from "../../images/AddIcon.svg";
@@ -12,6 +12,25 @@ const Note = ({ title, description, note, notes, setNote }) => {
   const [inputDesc, setInputDesc] = useState("");
   const [copy, setCopy] = useState(notes.notesItems);
   const [deleteInf, setDeleteInf] = useState(false);
+
+  useEffect(() => {
+    // getNotebooks();
+    // setCopy(notes.notesItems);
+    console.log(note);
+  }, [inputTitle, inputDesc, toggleNoteList, note]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("copy", JSON.stringify(copy));
+  // }, [inputDesc, inputTitle, toggleNoteList]);
+
+  // const getNotebooks = () => {
+  //   if (localStorage.getItem("copy") === null) {
+  //     localStorage.setItem("copy", JSON.stringify(notes.notesItems));
+  //   } else {
+  //     let copyLocal = JSON.parse(localStorage.getItem("copy"));
+  //     setCopy(copyLocal);
+  //   }
+  // };
 
   const deleteHandler = () => {
     setNote(note.filter((el) => el.id !== notes.id));
@@ -53,7 +72,7 @@ const Note = ({ title, description, note, notes, setNote }) => {
             }}
           />
           <Icon
-            src={xMarkTransparent}
+            src={xMark}
             onClick={() => setDeleteInf(!deleteInf)}
             className={toggleNoteList && "deleteBtn"}
           />
@@ -68,6 +87,8 @@ const Note = ({ title, description, note, notes, setNote }) => {
           setInputTitle={setInputTitle}
           setInputDesc={setInputDesc}
           copy={copy}
+          setNote={setNote}
+          note={note}
           toggleNoteList={toggleNoteList}
           setToggleNoteList={setToggleNoteList}
           setCopy={setCopy}

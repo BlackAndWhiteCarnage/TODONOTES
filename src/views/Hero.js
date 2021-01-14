@@ -100,7 +100,7 @@ const MainIcon = styled.img`
   z-index: 2;
   margin-bottom: 10rem;
   &:hover {
-    transform: scale(1.4) rotate(360deg);
+    transform: scale(1.4) rotate(-360deg);
     transition: 0.5s ease;
   }
   @media (max-width: 820px) {
