@@ -68,7 +68,6 @@ const Wrapper = styled.div`
     margin-top: 2rem;
   }
   &.toggle {
-    opacity: 1;
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.4);
@@ -108,9 +107,7 @@ const Icon = styled.img`
 `;
 
 const TasksWrapper = styled.div`
-  opacity: 0;
-  width: 0;
-  height: 0;
+  display: none;
   pointer-events: none;
   &.toggle {
     display: flex;

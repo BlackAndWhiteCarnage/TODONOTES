@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
 
@@ -80,7 +80,7 @@ const NoteForm = ({
 };
 
 const NoteWrapper = styled.div`
-  width: 50%;
+  width: 40rem;
   transition: 0.5s ease;
   display: flex;
   &.toggle {
@@ -116,17 +116,17 @@ const FormWrapper = styled.div`
   border-radius: 0.5rem;
   height: 10rem;
   &.toggle {
-    margin-left: auto;
+    margin-left: 10rem;
     padding: 1rem;
-    width: 80%;
+    width: 90%;
     height: auto;
     &:last-child {
-      margin-bottom: 5rem;
+      margin-bottom: 10rem;
     }
     @media screen and (max-width: 820px) {
       width: 100%;
       padding: 1rem;
-      margin-right: 1rem;
+      margin: 0.5rem;
     }
   }
 `;
@@ -144,15 +144,14 @@ const Icon = styled.img`
     transition: 0.5s ease;
   }
   &.toggle {
-    top: 2rem;
-    right: 2rem;
+    top: 0.5rem;
+    right: 0.5rem;
     pointer-events: all;
     width: 2.5rem;
     height: 2.5rem;
     @media screen and (max-width: 820px) {
       width: 2rem;
       height: 2rem;
-      right: 2rem;
     }
   }
   @media screen and (max-width: 820px) {
@@ -211,15 +210,13 @@ const Wrap = styled.div`
   transition: 0.5s ease;
   margin-left: 1rem;
   &.toggle {
-    margin-left: 0;
-    margin-top: 2rem;
     margin-bottom: 5rem;
     width: 95%;
     height: 30rem;
     transition: 0.5s ease;
     @media screen and (max-width: 820px) {
       position: relative;
-      height: auto;
+      height: 35rem;
       top: 25%;
       width: 100%;
       margin: 1rem;

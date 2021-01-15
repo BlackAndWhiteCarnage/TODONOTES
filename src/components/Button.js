@@ -15,7 +15,7 @@ const ButtonWrapper = styled.button`
   color: #fff;
   background: #01c915;
   transition: 0.5s ease;
-  border-radius: 10px 0 10px 0;
+  border-radius: 20px 0 20px 0;
   &:hover {
     cursor: pointer;
     background: #fff;

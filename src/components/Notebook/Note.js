@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
 import ArrowIn from "../../images/arrow-in.svg";
@@ -6,31 +6,12 @@ import ArrowOut from "../../images/arrow-out.svg";
 import AddIcon from "../../images/AddIcon.svg";
 import NoteForm from "./NoteForm";
 
-const Note = ({ title, description, note, notes, setNote }) => {
+const Note = ({ title, description, note, notes, setNote, date }) => {
   const [toggleNoteList, setToggleNoteList] = useState(false);
   const [inputTitle, setInputTitle] = useState("");
   const [inputDesc, setInputDesc] = useState("");
   const [copy, setCopy] = useState(notes.notesItems);
   const [deleteInf, setDeleteInf] = useState(false);
-
-  useEffect(() => {
-    // getNotebooks();
-    // setCopy(notes.notesItems);
-    console.log(note);
-  }, [inputTitle, inputDesc, toggleNoteList, note]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("copy", JSON.stringify(copy));
-  // }, [inputDesc, inputTitle, toggleNoteList]);
-
-  // const getNotebooks = () => {
-  //   if (localStorage.getItem("copy") === null) {
-  //     localStorage.setItem("copy", JSON.stringify(notes.notesItems));
-  //   } else {
-  //     let copyLocal = JSON.parse(localStorage.getItem("copy"));
-  //     setCopy(copyLocal);
-  //   }
-  // };
 
   const deleteHandler = () => {
     setNote(note.filter((el) => el.id !== notes.id));
@@ -52,14 +33,14 @@ const Note = ({ title, description, note, notes, setNote }) => {
     });
     setToggleNoteList(true);
   };
-
   return (
     <Wrapper>
       <InfoWrapper className={toggleNoteList && "toggle"}>
         <NoteInfoWrapper className={toggleNoteList && "toggle"}>
           <NoteHeader>{title}</NoteHeader>
           <NoteDesc>{description}</NoteDesc>
-          <h1>Ilość notatek: {copy.length}</h1>
+          <p>Ilość notatek: {copy.length}</p>
+          <p>Data dodania: {date}</p>
         </NoteInfoWrapper>
         <IconWrapper className={toggleNoteList && "toggle"}>
           <Icon src={AddIcon} onClick={addNoteHandler} />
@@ -115,29 +96,28 @@ const InfoWrapper = styled.div`
   display: flex;
   height: 10rem;
   background: rgba(255, 255, 255, 0.4);
-  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
   backdrop-filter: blur(3.5px);
   -webkit-backdrop-filter: blur(3.5px);
   border-radius: 10px;
   margin: 1rem;
-  width: 20%;
+  min-width: 20rem;
   &.toggle {
     position: fixed;
-    width: 13%;
+    min-width: 5rem;
     transition: 0.5s ease;
     top: 0;
-    height: 30%;
+    height: 10rem;
     z-index: 6;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(3.5px);
-    -webkit-backdrop-filter: blur(3.5px);
     border-radius: 10px;
     @media screen and (max-width: 820px) {
-      width: 90%;
-      height: 18%;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      width: 100%;
+      height: 8rem;
       margin: 0;
+      padding: 1rem;
       z-index: 6;
+      border-radius: 0;
     }
   }
   @media screen and (max-width: 820px) {
@@ -149,10 +129,12 @@ const NoteInfoWrapper = styled.div`
   flex-wrap: wrap;
   padding: 1rem;
   overflow: hidden;
+  p {
+    width: 100%;
+    font-size: 1rem;
+  }
   &.toggle {
-    @media screen and (max-width: 820px) {
-      display: none;
-    }
+    display: none;
   }
 `;
 const NoteHeader = styled.h3`
@@ -162,8 +144,8 @@ const NoteHeader = styled.h3`
   text-overflow: ellipsis;
   overflow: hidden;
 `;
-const NoteDesc = styled.p`
-  font-size: 1.6rem;
+const NoteDesc = styled.h4`
+  font-size: 1.4rem;
   font-weight: 400;
   width: 70%;
   text-overflow: ellipsis;
@@ -180,9 +162,13 @@ const IconWrapper = styled.div`
   background: rgba(255, 255, 255, 0.8);
   padding: 0.5rem;
   &.toggle {
+    position: relative;
+    align-items: center;
+    background: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     @media screen and (max-width: 820px) {
-      position: relative;
-      width: 100%;
       flex-direction: row;
       justify-content: space-around;
       align-items: flex-end;
@@ -202,11 +188,8 @@ const Icon = styled.img`
   &.checked {
     background: #01c915;
   }
-
   &.deleteBtn {
-    @media screen and (max-width: 820px) {
-      display: none;
-    }
+    display: none;
   }
 `;
 const DeleteInfo = styled.div`

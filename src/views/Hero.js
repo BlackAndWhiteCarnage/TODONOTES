@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import HeroImg3 from "../images/Hero3.jpg";
 import AddIcon from "../images/AddIcon.svg";
 import TaskWrapper from "../components/Task/TaskWrapper";
 import NotebookWrapper from "../components/Notebook/NotebookWrapper";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/Button";
 
 const Hero = () => {
@@ -14,9 +13,11 @@ const Hero = () => {
   const [toggleOptions, setToggleOptions] = useState(false);
   let [text, setText] = useState(0);
 
-  setTimeout(() => {
-    setText(text < 2 ? text + 1 : (text = 0));
-  }, 3000);
+  if (toggle === 0) {
+    setTimeout(() => {
+      setText(text < 2 ? text + 1 : (text = 0));
+    }, 3000);
+  }
 
   return (
     <Wrapper>

@@ -169,7 +169,6 @@ const Icon = styled.img`
   z-index: 3;
   &:hover {
     transform: scale(1.2);
-
     transition: 0.5s ease;
     transform: scale(1.2) rotate(-360deg);
   }

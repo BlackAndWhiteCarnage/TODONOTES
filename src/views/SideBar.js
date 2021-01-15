@@ -1,14 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../images/Logo.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import NotebookIcon from "../images/NotebookIcon.svg";
+import TaskIcon from "../images/TaskIcon.svg";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const toggle = useSelector((state) => state.toggle);
+  console.log(
+    toggle === 0
+      ? "toggle equals 0"
+      : toggle === 4 || 2
+      ? "toggle equals 2 or 4"
+      : toggle === 3 || (1 && "toggle equals 3 or 1")
+  );
+  console.log("Toggle", toggle);
+
   return (
     <SideBarWrapper>
       <SideBar>
-        <LogoWrapper src={Logo} onClick={() => dispatch({ type: "BACK" })} />
+        <LogoWrapper
+          src={
+            toggle === 0
+              ? Logo
+              : toggle === 4
+              ? NotebookIcon
+              : toggle === 3
+              ? TaskIcon
+              : Logo
+          }
+          onClick={() => dispatch({ type: "BACK" })}
+        />
         <List>
           <ListItem onClick={() => dispatch({ type: "NOTEBOOKSLISTS" })}>
             Notatniki
@@ -38,14 +61,13 @@ const SideBarWrapper = styled.div`
 `;
 
 const SideBar = styled.div`
-  width: 90%;
+  width: 80%;
   height: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
   z-index: 2;
   @media (max-width: 820px) {
-    width: 95%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -83,12 +105,14 @@ const ListItem = styled.li`
 
 const LogoWrapper = styled.img`
   cursor: pointer;
-  width: 7rem;
-  height: 7rem;
+  width: 100%;
+  height: 6rem;
   z-index: 2;
+  margin-top: 1rem;
   @media (max-width: 820px) {
     width: 5rem;
-    height: 100%;
+    height: 80%;
+    margin: 0;
   }
 `;
 

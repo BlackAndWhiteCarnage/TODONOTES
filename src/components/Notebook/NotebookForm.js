@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import Button from "../Button";
+import { date } from "../GetDate";
 import styled from "styled-components";
 
 const TaskForm = ({
@@ -28,6 +29,7 @@ const TaskForm = ({
         title: inputTitle,
         description: inputDesc,
         notesItems: [],
+        date: date,
         id: Math.random() * 1000,
       },
     ]);

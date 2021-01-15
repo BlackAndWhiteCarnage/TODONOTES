@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Note from "./Note";
 
@@ -15,6 +15,7 @@ const NotebookList = ({ note, setNote }) => {
           <Note
             title={notes.title}
             description={notes.description}
+            date={notes.date}
             key={notes.id}
             note={note}
             notes={notes}
@@ -50,8 +51,9 @@ const Info = styled.p`
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 100vh;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   overflow-y: scroll;
   @media screen and (max-width: 820px) {

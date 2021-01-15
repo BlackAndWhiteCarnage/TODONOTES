@@ -9,7 +9,6 @@ import NotebookForm from "./NotebookForm";
 const NotebookWrapper = () => {
   const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
-
   const [inputTitle, setInputTitle] = useState("");
   const [inputDesc, setInputDesc] = useState("");
   const [note, setNote] = useState([]);
