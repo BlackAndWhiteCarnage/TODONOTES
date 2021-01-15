@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import BackIcon from "../../images/Back.svg";
 import NotebookList from "./NotebookList";
 import NotebookForm from "./NotebookForm";
@@ -9,6 +8,7 @@ import NotebookForm from "./NotebookForm";
 const NotebookWrapper = () => {
   const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
   const [inputTitle, setInputTitle] = useState("");
   const [inputDesc, setInputDesc] = useState("");
   const [note, setNote] = useState([]);
@@ -29,10 +29,12 @@ const NotebookWrapper = () => {
       setNote(notebooksLocal);
     }
   };
-
+  console.log(toggleDarkMode);
   return (
     <>
-      <Wrapper className={toggle === 2 ? "toggle" : "toggleOut"}>
+      <Wrapper
+        className={toggle === 2 && `toggle ${toggleDarkMode && " darkMode"}`}
+      >
         <NotebookForm
           note={note}
           setNote={setNote}
@@ -64,6 +66,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+
   label {
     font-size: 2.4rem;
     cursor: pointer;
@@ -80,6 +83,13 @@ const Wrapper = styled.div`
     height: 30rem;
     transition: 0.5s ease;
     pointer-events: all;
+    &.darkMode {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+    }
     @media screen and (max-width: 820px) {
       width: 95%;
       label {

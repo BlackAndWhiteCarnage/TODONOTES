@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
 import { date } from "../GetDate";
 import styled from "styled-components";
@@ -12,6 +12,7 @@ const TaskForm = ({
   note,
   setNote,
 }) => {
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
   const dispatch = useDispatch();
 
   const inputTitleHandler = (e) => {
@@ -41,6 +42,7 @@ const TaskForm = ({
     <>
       <label htmlFor="Notebook">Nazwa Notatnika</label>
       <TitleInput
+        className={toggleDarkMode && "darkMode"}
         value={inputTitle}
         onChange={inputTitleHandler}
         id="Notebook"
@@ -48,6 +50,7 @@ const TaskForm = ({
       />
       <label htmlFor="Description">Opis</label>
       <DescriptionInput
+        className={toggleDarkMode && "darkMode"}
         value={inputDesc}
         onChange={inputDescHandler}
         id="Description"
@@ -72,6 +75,10 @@ const TitleInput = styled.input`
   font-size: 1.6rem;
   border-bottom: 3px solid #01c915;
   padding: 1rem 0;
+  &.darkMode {
+    background: #353535;
+    color: white;
+  }
   @media screen and (max-width: 820px) {
     font-size: 1.2rem;
   }
@@ -85,6 +92,10 @@ const DescriptionInput = styled.textarea`
   font-size: 2rem;
   border-bottom: 3px solid #01c915;
   resize: none;
+  &.darkMode {
+    background: #353535;
+    color: white;
+  }
   @media screen and (max-width: 820px) {
     font-size: 1.2rem;
   }

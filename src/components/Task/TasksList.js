@@ -1,11 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import Task from "./Task";
+import { useSelector } from "react-redux";
 
 const TasksList = ({ tasks, setTasks }) => {
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
+
   return (
     <>
-      {tasks.length === 0 && <Info>Nie masz jeszcze żadnych zadań</Info>}
+      {tasks.length === 0 && (
+        <Info className={toggleDarkMode && "darkMode"}>
+          Nie masz jeszcze żadnych zadań
+        </Info>
+      )}
       {tasks.map((task) => (
         <Task
           text={task.text}
@@ -29,6 +36,9 @@ const Info = styled.div`
   align-items: center;
   padding: 1rem;
   justify-content: center;
+  &.darkMode {
+    color: rgba(255, 255, 255, 0.3);
+  }
 `;
 
 export default TasksList;

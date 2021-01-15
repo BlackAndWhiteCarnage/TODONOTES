@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
+import { useSelector } from "react-redux";
 
 const NoteForm = ({
   copy,
@@ -11,13 +12,31 @@ const NoteForm = ({
   setNote,
   note,
 }) => {
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
+
   return (
-    <NoteWrapper className={toggleNoteList && "toggle"}>
+    <NoteWrapper
+      className={
+        toggleNoteList
+          ? `toggle ${toggleDarkMode && " darkMode"}`
+          : toggleDarkMode && " darkMode"
+      }
+    >
       {copy.map((item) => (
         <Wrap key={item.uuid} className={toggleNoteList && "toggle"}>
-          <FormWrapper className={toggleNoteList && "toggle"}>
+          <FormWrapper
+            className={
+              toggleNoteList
+                ? `toggle ${toggleDarkMode && " darkMode"}`
+                : toggleDarkMode && " darkMode"
+            }
+          >
             <TitleInput
-              className={toggleNoteList && "toggle"}
+              className={
+                toggleNoteList
+                  ? `toggle ${toggleDarkMode && " darkMode"}`
+                  : toggleDarkMode && " darkMode"
+              }
               value={item.noteTitle}
               type="text"
               onChange={(e) => {
@@ -33,7 +52,11 @@ const NoteForm = ({
               }}
             />
             <DescInput
-              className={toggleNoteList && "toggle"}
+              className={
+                toggleNoteList
+                  ? `toggle ${toggleDarkMode && " darkMode"}`
+                  : toggleDarkMode && " darkMode"
+              }
               value={item.noteDesc}
               onChange={(e) => {
                 item.noteDesc = e.target.value;
@@ -97,6 +120,9 @@ const NoteWrapper = styled.div`
     width: 100%;
     transition: 0.5s ease;
     overflow-y: scroll;
+    &.darkMode {
+      background: rgba(53, 53, 53, 0.4);
+    }
     @media screen and (max-width: 820px) {
       padding: 0;
     }
@@ -115,18 +141,30 @@ const FormWrapper = styled.div`
   background: #fff;
   border-radius: 0.5rem;
   height: 10rem;
+  &.darkMode {
+    background: #4e4e4e;
+  }
   &.toggle {
     margin-left: 10rem;
     padding: 1rem;
     width: 90%;
     height: auto;
+    &.darkMode {
+      background: #4e4e4e;
+    }
     &:last-child {
       margin-bottom: 10rem;
+    }
+    &:first-child {
+      margin-top: 15rem;
     }
     @media screen and (max-width: 820px) {
       width: 100%;
       padding: 1rem;
       margin: 0.5rem;
+      &:first-child {
+        margin-top: 0;
+      }
     }
   }
 `;
@@ -164,12 +202,18 @@ const TitleInput = styled.input`
   font-weight: bold;
   background: none;
   border-bottom: 3px solid #01c915;
+  &.darkMode {
+    color: white;
+  }
   &.toggle {
     background: transparent;
     font-size: 2.4rem;
     width: 60%;
     transition: 0.5s ease;
     padding: 0.5rem;
+    &.darkMode {
+      color: white;
+    }
     @media screen and (max-width: 820px) {
       width: 90%;
       font-size: 1.6rem;
@@ -185,6 +229,9 @@ const DescInput = styled.textarea`
   margin-bottom: 0.5rem;
   overflow: hidden;
   resize: none;
+  &.darkMode {
+    color: white;
+  }
   &.toggle {
     background: #f1f1f1;
     font-size: 2.4rem;
@@ -194,6 +241,10 @@ const DescInput = styled.textarea`
     width: 100%;
     height: 25rem;
     transition: 0.5s ease;
+    &.darkMode {
+      background: #535353;
+      color: white;
+    }
     @media screen and (max-width: 820px) {
       width: 100%;
       font-size: 1.2rem;

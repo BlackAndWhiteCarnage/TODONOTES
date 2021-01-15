@@ -3,10 +3,13 @@ import styled from "styled-components";
 import CheckedIcon from "../../images/CheckedIcon.svg";
 import UncheckedIcon from "../../images/UncheckedIcon.svg";
 import InfoIcon from "../../images/InfoIcon.svg";
+import { useSelector } from "react-redux";
 import xMark from "../../images/X-Mark.svg";
 
 const Task = ({ text, tasks, task, setTasks }) => {
   const [toggle, setToggle] = useState(false);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
+
   const deleteHandler = () => {
     setTasks(tasks.filter((el) => el.id !== task.id));
   };
@@ -27,7 +30,13 @@ const Task = ({ text, tasks, task, setTasks }) => {
 
   return (
     <>
-      <Wrapper className={`${task.completed && "checked"}`}>
+      <Wrapper
+        className={
+          task.completed
+            ? `checked ${toggleDarkMode && " darkMode"}`
+            : `${toggleDarkMode && " darkMode"}`
+        }
+      >
         <TaskHeader>{text}</TaskHeader>
         <IconWrapper>
           <Icon
@@ -53,13 +62,15 @@ const Wrapper = styled.div`
   transition: 0.5s ease;
   overflow: hidden;
   border-radius: 10px;
-  &.checked {
-    background: rgba(255, 255, 255, 0.2);
-    transition: 0.5s ease;
+  &.darkMode {
+    background: #4e4e4e;
   }
-  &.toggle {
-    height: 20rem;
+  &.checked {
+    background: rgba(255, 255, 255, 0.6);
     transition: 0.5s ease;
+    &.darkMode {
+      background: rgba(53, 53, 53, 0.6);
+    }
   }
   @media screen and (max-width: 820px) {
     min-height: 10rem;

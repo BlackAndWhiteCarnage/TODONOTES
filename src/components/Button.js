@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Button = ({ value, click }) => {
-  return <ButtonWrapper onClick={click}>{value}</ButtonWrapper>;
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
+
+  return (
+    <ButtonWrapper onClick={click} className={toggleDarkMode && "darkMode"}>
+      {value}
+    </ButtonWrapper>
+  );
 };
 
 const ButtonWrapper = styled.button`
@@ -12,7 +19,7 @@ const ButtonWrapper = styled.button`
   font-weight: bold;
   border: none;
   margin: 1.5rem;
-  color: #fff;
+  color: white;
   background: #01c915;
   transition: 0.5s ease;
   border-radius: 20px 0 20px 0;
@@ -21,6 +28,13 @@ const ButtonWrapper = styled.button`
     background: #fff;
     color: #01c915;
     transition: 0.5s ease;
+    &.darkMode {
+      background: #353535;
+      color: white;
+    }
+  }
+  &.darkMode {
+    color: black;
   }
   @media (max-width: 820px) {
     width: 8rem;

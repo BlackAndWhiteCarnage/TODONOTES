@@ -9,6 +9,7 @@ import Button from "../components/Button";
 
 const Hero = () => {
   const toggle = useSelector((state) => state.toggle);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
   const dispatch = useDispatch();
   const [toggleOptions, setToggleOptions] = useState(false);
   let [text, setText] = useState(0);
@@ -20,7 +21,7 @@ const Hero = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={toggleDarkMode && "darkMode"}>
       <HeaderWrapper className={toggle && "toggle"}>
         <Header>
           Dodawaj.{" "}
@@ -53,7 +54,7 @@ const Hero = () => {
       </HeaderWrapper>
       <TaskWrapper />
       <NotebookWrapper />
-      <HeroImage src={HeroImg3} />
+      <HeroImage src={HeroImg3} className={toggleDarkMode && "darkMode"} />
     </Wrapper>
   );
 };
@@ -65,6 +66,9 @@ const HeroImage = styled.img`
   object-fit: cover;
   opacity: 0.8;
   z-index: 1;
+  &.darkMode {
+    filter: brightness(35%);
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -91,6 +95,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  &.darkMode {
+    color: white;
+  }
 `;
 
 const MainIcon = styled.img`

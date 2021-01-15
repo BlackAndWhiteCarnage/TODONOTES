@@ -5,15 +5,17 @@ import ColorIcon from "../images/ColorIcon.svg";
 import AddIcon from "../images/AddIcon.svg";
 import HomeIcon from "../images/Home.svg";
 import BackIcon from "../images/Back.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Modal = () => {
   const [showColors, setShowColors] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
+
   const dispatch = useDispatch();
 
   return (
-    <ModalWrapper>
+    <ModalWrapper className={toggleDarkMode && "darkMode"}>
       <Icon src={HomeIcon} onClick={() => dispatch({ type: "BACK" })} />
       <Icon src={ColorIcon} onClick={() => setShowColors(!showColors)} />
       <Colors className={showColors && "toggle"}>
@@ -30,7 +32,13 @@ const Modal = () => {
           onClick={() => setShowColors(false)}
         />
       </Colors>
-      <Icon src={DarkModeIcon} />
+      <Icon
+        src={DarkModeIcon}
+        onClick={() => {
+          dispatch({ type: "DARKMODE" });
+          console.log(toggleDarkMode);
+        }}
+      />
       <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
       <Options className={showOptions && "toggle"}>
         <Option
@@ -72,6 +80,9 @@ const ModalWrapper = styled.div`
   border-radius: 0 0 0 10px;
   &.toggle {
     width: 20rem;
+  }
+  &.darkMode {
+    background: #353535;
   }
   @media (max-width: 820px) {
     width: 100%;

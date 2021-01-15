@@ -8,6 +8,7 @@ import TaskForm from "./TaskForm";
 const TaskWrapper = () => {
   const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
   const [inputText, setInputText] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -31,7 +32,9 @@ const TaskWrapper = () => {
 
   return (
     <>
-      <Wrapper className={toggle === 1 && "toggle"}>
+      <Wrapper
+        className={toggle === 1 && `toggle ${toggleDarkMode && " darkMode"}`}
+      >
         <TaskForm
           tasks={tasks}
           setTasks={setTasks}
@@ -40,7 +43,9 @@ const TaskWrapper = () => {
         />
         <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
       </Wrapper>
-      <TasksWrapper className={toggle === 3 && "toggle"}>
+      <TasksWrapper
+        className={toggle === 3 && `toggle ${toggleDarkMode && " darkMode"}`}
+      >
         <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
         <TasksList tasks={tasks} setTasks={setTasks} />
       </TasksWrapper>
@@ -78,6 +83,13 @@ const Wrapper = styled.div`
     width: 70%;
     transition: 0.5s ease;
     pointer-events: all;
+    &.darkMode {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+    }
     @media screen and (max-width: 820px) {
       height: 25rem;
       width: 95%;
@@ -131,6 +143,13 @@ const TasksWrapper = styled.div`
     width: 60%;
     height: 40rem;
     transition: 0.5s ease;
+    &.darkMode {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+    }
     @media screen and (max-width: 820px) {
       top: 50%;
       width: 95%;

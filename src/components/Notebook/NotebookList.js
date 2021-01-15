@@ -6,6 +6,7 @@ const NotebookList = ({ note, setNote }) => {
   return (
     <NotebookListWrapper>
       {note.length === 0 && (
+        //DO ZROBIENIA
         <Info>
           Nie masz jeszcze żadnych <span>notatników</span>
         </Info>

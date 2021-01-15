@@ -8,17 +8,10 @@ import TaskIcon from "../images/TaskIcon.svg";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
-  console.log(
-    toggle === 0
-      ? "toggle equals 0"
-      : toggle === 4 || 2
-      ? "toggle equals 2 or 4"
-      : toggle === 3 || (1 && "toggle equals 3 or 1")
-  );
-  console.log("Toggle", toggle);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
   return (
-    <SideBarWrapper>
+    <SideBarWrapper className={toggleDarkMode && "darkMode"}>
       <SideBar>
         <LogoWrapper
           src={
@@ -49,7 +42,12 @@ const SideBarWrapper = styled.div`
   min-width: 10rem;
   height: 100vh;
   background: #fff;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   z-index: 3;
+  &.darkMode {
+    background: #353535;
+    color: white;
+  }
   @media (max-width: 820px) {
     position: fixed;
     bottom: 0;

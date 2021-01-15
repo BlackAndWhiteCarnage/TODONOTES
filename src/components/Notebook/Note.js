@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
 import ArrowIn from "../../images/arrow-in.svg";
@@ -12,6 +13,7 @@ const Note = ({ title, description, note, notes, setNote, date }) => {
   const [inputDesc, setInputDesc] = useState("");
   const [copy, setCopy] = useState(notes.notesItems);
   const [deleteInf, setDeleteInf] = useState(false);
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
   const deleteHandler = () => {
     setNote(note.filter((el) => el.id !== notes.id));
@@ -35,14 +37,22 @@ const Note = ({ title, description, note, notes, setNote, date }) => {
   };
   return (
     <Wrapper>
-      <InfoWrapper className={toggleNoteList && "toggle"}>
+      <InfoWrapper
+        className={
+          toggleNoteList
+            ? `toggle ${toggleDarkMode && " darkMode"}`
+            : toggleDarkMode && " darkMode"
+        }
+      >
         <NoteInfoWrapper className={toggleNoteList && "toggle"}>
           <NoteHeader>{title}</NoteHeader>
           <NoteDesc>{description}</NoteDesc>
           <p>Ilość notatek: {copy.length}</p>
           <p>Data dodania: {date}</p>
         </NoteInfoWrapper>
-        <IconWrapper className={toggleNoteList && "toggle"}>
+        <IconWrapper
+          className={toggleNoteList ? `toggle` : toggleDarkMode && " darkMode"}
+        >
           <Icon src={AddIcon} onClick={addNoteHandler} />
           <Icon
             src={toggleNoteList ? ArrowOut : ArrowIn}
@@ -101,6 +111,13 @@ const InfoWrapper = styled.div`
   border-radius: 10px;
   margin: 1rem;
   min-width: 20rem;
+  &.darkMode {
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+  }
   &.toggle {
     position: fixed;
     min-width: 5rem;
@@ -110,6 +127,9 @@ const InfoWrapper = styled.div`
     z-index: 6;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
+    &.darkMode {
+      background: #4e4e4e;
+    }
     @media screen and (max-width: 820px) {
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       width: 100%;
@@ -161,6 +181,9 @@ const IconWrapper = styled.div`
   justify-content: space-around;
   background: rgba(255, 255, 255, 0.8);
   padding: 0.5rem;
+  &.darkMode {
+    background: #4e4e4e;
+  }
   &.toggle {
     position: relative;
     align-items: center;
@@ -168,6 +191,7 @@ const IconWrapper = styled.div`
     width: 100%;
     margin: 0;
     padding: 0;
+
     @media screen and (max-width: 820px) {
       flex-direction: row;
       justify-content: space-around;
