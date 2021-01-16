@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import Note from "./Note";
+import Notebook from "./Notebook";
 
 const NotebookList = ({ note, setNote }) => {
   return (
     <NotebookListWrapper>
       {note.length === 0 && (
-        //DO ZROBIENIA
         <Info>
           Nie masz jeszcze żadnych <span>notatników</span>
         </Info>
       )}
-      <Wrapper>
+      <NotebookWrapper>
         {note.map((notes) => (
-          <Note
+          <Notebook
             title={notes.title}
             description={notes.description}
             date={notes.date}
@@ -23,7 +22,7 @@ const NotebookList = ({ note, setNote }) => {
             setNote={setNote}
           />
         ))}
-      </Wrapper>
+      </NotebookWrapper>
     </NotebookListWrapper>
   );
 };
@@ -36,11 +35,11 @@ const NotebookListWrapper = styled.div`
 `;
 
 const Info = styled.p`
-  font-size: 6rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 5rem;
   font-weight: bold;
   span {
     color: #01c915;
@@ -50,16 +49,12 @@ const Info = styled.p`
   }
 `;
 
-const Wrapper = styled.div`
+const NotebookWrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   overflow-y: scroll;
-  @media screen and (max-width: 820px) {
-    overflow-x: hidden;
-  }
 `;
 
 export default NotebookList;

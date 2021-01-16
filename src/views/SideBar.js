@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "../images/Logo.svg";
 import LogoWhite from "../images/LogoWhite.svg";
-import { useDispatch, useSelector } from "react-redux";
 import NotebookIcon from "../images/NotebookIcon.svg";
 import TaskIcon from "../images/TaskIcon.svg";
 
@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <SideBarWrapper className={toggleDarkMode && "darkMode"}>
       <SideBar>
-        <LogoWrapper
+        <LogoImage
           src={
             !toggleDarkMode
               ? toggle === 0
@@ -51,11 +51,11 @@ const SideBarWrapper = styled.div`
   min-width: 10rem;
   height: 100vh;
   background: #fff;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   z-index: 3;
+  box-shadow: 5px 0px 20px 10px rgba(0, 0, 0, 0.2);
   &.darkMode {
-    background: #353535;
-    color: white;
+    background: #1d1d1d;
+    color: #fff;
   }
   @media (max-width: 820px) {
     position: fixed;
@@ -81,6 +81,22 @@ const SideBar = styled.div`
   }
 `;
 
+const LogoImage = styled.img`
+  cursor: pointer;
+  width: 100%;
+  height: 6rem;
+  z-index: 2;
+  margin-top: 1rem;
+  &::selection {
+    background: none;
+  }
+  @media (max-width: 820px) {
+    width: 5rem;
+    height: 80%;
+    margin: 0;
+  }
+`;
+
 const List = styled.ul`
   list-style: none;
   font-weight: bold;
@@ -94,7 +110,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  margin: 3rem 0rem 1rem 0;
+  margin-top: 2rem;
   white-space: nowrap;
   font-size: 1.6rem;
   transition: 0.2s ease;
@@ -104,22 +120,7 @@ const ListItem = styled.li`
     transition: 0.2s ease;
   }
   @media (max-width: 820px) {
-    margin: 0;
-    margin-left: 1rem;
-    padding: 0.5rem 0.1rem;
-  }
-`;
-
-const LogoWrapper = styled.img`
-  cursor: pointer;
-  width: 100%;
-  height: 6rem;
-  z-index: 2;
-  margin-top: 1rem;
-  @media (max-width: 820px) {
-    width: 5rem;
-    height: 80%;
-    margin: 0;
+    margin: 0 0 0 1rem;
   }
 `;
 

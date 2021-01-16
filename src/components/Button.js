@@ -16,25 +16,31 @@ const ButtonWrapper = styled.button`
   width: 10rem;
   height: 3.5rem;
   font-size: 2.4rem;
-  font-weight: bold;
+  font-weight: 400;
   border: none;
   margin: 1.5rem;
-  color: white;
+  color: #fff;
   background: #01c915;
   transition: 0.5s ease;
   border-radius: 20px 0 20px 0;
+  &::selection {
+    background: none;
+  }
+  &:focus {
+    outline: none;
+  }
   &:hover {
     cursor: pointer;
     background: #fff;
     color: #01c915;
     transition: 0.5s ease;
     &.darkMode {
-      background: #353535;
-      color: white;
+      background: #1d1d1d;
+      color: #fff;
     }
   }
   &.darkMode {
-    color: black;
+    color: #1d1d1d;
   }
   @media (max-width: 820px) {
     width: 8rem;

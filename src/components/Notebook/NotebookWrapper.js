@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 import BackIcon from "../../images/Back.svg";
 import BackIconWhite from "../../images/BackWhite.svg";
 import NotebookList from "./NotebookList";
-import NotebookForm from "./NotebookForm";
+import NotebookForm from "./NotebookWrapperForm";
 
 const NotebookWrapper = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const NotebookWrapper = () => {
   };
   return (
     <>
-      <Wrapper
+      <NotebookFormWrapper
         className={toggle === 2 && `toggle ${toggleDarkMode && " darkMode"}`}
       >
         <NotebookForm
@@ -47,59 +47,58 @@ const NotebookWrapper = () => {
           src={toggleDarkMode ? BackIconWhite : BackIcon}
           onClick={() => dispatch({ type: "BACK" })}
         />
-      </Wrapper>
-      <NotebooksListWrapper className={toggle === 4 && "toggle"}>
+      </NotebookFormWrapper>
+      <NotebookListWrapper className={toggle === 4 && "toggle"}>
         <NotebookList note={note} setNote={setNote} />
-      </NotebooksListWrapper>
+      </NotebookListWrapper>
     </>
   );
 };
 
-const Wrapper = styled.div`
+const NotebookFormWrapper = styled.div`
   display: none;
-  width: 0;
-  transition: 0.5s ease;
-  position: absolute;
-  pointer-events: none;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-  z-index: 5;
-  transition: 0.5s ease;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-
   label {
     font-size: 2.4rem;
     cursor: pointer;
   }
   &.toggle {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 70%;
+    height: 30rem;
     display: flex;
-    opacity: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
     border-radius: 10px;
-    width: 70%;
-    height: 30rem;
     transition: 0.5s ease;
-    pointer-events: all;
+    z-index: 5;
     &.darkMode {
       background: rgba(0, 0, 0, 0.4);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border-radius: 10px;
     }
     @media screen and (max-width: 820px) {
       width: 95%;
       label {
         width: 95%;
-        margin-top: 2rem;
+        margin-top: 1rem;
       }
     }
+  }
+`;
+
+const NotebookListWrapper = styled.div`
+  display: none;
+  z-index: 2;
+  &.toggle {
+    width: 100%;
+    height: 100vh;
+    display: flex;
   }
 `;
 
@@ -110,6 +109,9 @@ const Icon = styled.img`
   width: 2.5rem;
   cursor: pointer;
   transition: 0.5s ease;
+  &::selection {
+    background: none;
+  }
   &:hover {
     transition: 0.5s ease;
     transform: scale(1.2) rotate(-360deg);
@@ -118,20 +120,6 @@ const Icon = styled.img`
     width: 2rem;
     top: 0.5rem;
     right: 0.5rem;
-  }
-`;
-
-const NotebooksListWrapper = styled.div`
-  opacity: 0;
-  z-index: 2;
-  display: none;
-  transition: 0.5s ease;
-  &.toggle {
-    opacity: 1;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    transition: 0.5s ease;
   }
 `;
 

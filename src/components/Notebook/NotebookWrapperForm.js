@@ -12,8 +12,8 @@ const TaskForm = ({
   note,
   setNote,
 }) => {
-  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
   const dispatch = useDispatch();
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
   const inputTitleHandler = (e) => {
     setInputTitle(e.target.value);
@@ -78,10 +78,13 @@ const TitleInput = styled.input`
   border-bottom: 3px solid #01c915;
   padding: 1rem 0;
   font-family: "Lato", sans-serif;
-
+  &:focus {
+    outline: none;
+    border-top: 3px solid #01c915;
+  }
   &.darkMode {
     background: #353535;
-    color: white;
+    color: #fff;
   }
   @media screen and (max-width: 820px) {
     font-size: 1.2rem;
@@ -91,13 +94,16 @@ const TitleInput = styled.input`
 const DescriptionInput = styled.textarea`
   border: none;
   width: 95%;
-  height: 8rem;
+  height: 7rem;
   margin: auto;
   font-size: 2rem;
   border-bottom: 3px solid #01c915;
   resize: none;
   font-family: "Lato", sans-serif;
-
+  &:focus {
+    outline: none;
+    border-top: 3px solid #01c915;
+  }
   &.darkMode {
     background: #353535;
     color: white;

@@ -28,69 +28,68 @@ const Task = ({ text, tasks, task, setTasks }) => {
   };
 
   return (
-    <>
-      <Wrapper
-        className={
-          task.completed
-            ? `checked ${toggleDarkMode && " darkMode"}`
-            : `${toggleDarkMode && " darkMode"}`
-        }
-      >
-        <TaskHeader>{text}</TaskHeader>
-        <IconWrapper>
-          <Icon
-            src={
-              task.completed
-                ? CheckedIcon
-                : toggleDarkMode
-                ? UncheckedIconWhite
-                : UncheckedIcon
-            }
-            onClick={completeHandler}
-          />
-          <Icon src={xMark} onClick={deleteHandler} />
-        </IconWrapper>
-      </Wrapper>
-    </>
+    <TaskWrapper
+      className={
+        task.completed
+          ? `checked ${toggleDarkMode && " darkMode"}`
+          : `${toggleDarkMode && " darkMode"}`
+      }
+    >
+      <TaskHeader>{text}</TaskHeader>
+      <IconWrapper>
+        <Icon
+          src={
+            task.completed
+              ? CheckedIcon
+              : toggleDarkMode
+              ? UncheckedIconWhite
+              : UncheckedIcon
+          }
+          onClick={completeHandler}
+        />
+        <Icon src={xMark} onClick={deleteHandler} />
+      </IconWrapper>
+    </TaskWrapper>
   );
 };
 
-const Wrapper = styled.div`
+const TaskWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 90%;
-  min-height: 4rem;
+  min-height: 5rem;
   margin: 1rem 0;
   background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: 0.5s ease;
-  overflow: hidden;
   border-radius: 10px;
+  overflow: hidden;
+  transition: 0.5s ease;
   &.darkMode {
-    background: #4e4e4e;
+    background: #1d1d1d;
   }
   &.checked {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.3);
     transition: 0.5s ease;
     &.darkMode {
-      background: rgba(53, 53, 53, 0.6);
+      background: rgba(53, 53, 53, 0.3);
     }
   }
   @media screen and (max-width: 820px) {
-    min-height: 10rem;
+    min-height: 8rem;
     align-items: flex-start;
   }
 `;
 
 const TaskHeader = styled.h2`
-  display: block;
-  margin-left: 1rem;
+  margin: 1rem;
   font-size: 1.6rem;
   font-weight: 700;
-  width: 70%;
+  width: 80%;
   word-wrap: break-word;
   white-space: wrap;
   font-family: "Lato", sans-serif;
+  @media screen and (max-width: 820px) {
+    margin: 0.5rem;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -111,6 +110,9 @@ const Icon = styled.img`
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 50%;
+  &::selection {
+    background: none;
+  }
   &:hover {
     transform: scale(1.2);
     transition: 0.5s ease;

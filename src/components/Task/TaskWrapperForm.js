@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Button from "../Button";
 
-const TaskForm = ({ inputText, setInputText, tasks, setTasks }) => {
+const TaskWrapperForm = ({ inputText, setInputText, tasks, setTasks }) => {
   const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
   const dispatch = useDispatch();
 
@@ -48,6 +48,10 @@ const Input = styled.input`
   font-size: 1.6rem;
   border-bottom: 3px solid #01c915;
   padding: 1rem 0;
+  &:focus {
+    outline: none;
+    border-top: 3px solid #01c915;
+  }
   &.darkMode {
     background: #353535;
     color: white;
@@ -57,4 +61,4 @@ const Input = styled.input`
   }
 `;
 
-export default TaskForm;
+export default TaskWrapperForm;

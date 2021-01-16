@@ -31,6 +31,9 @@ const GlobalStyles = createGlobalStyle`
     ::-webkit-scrollbar-thumb:hover {
     background: #00E016;
     }
+    ::selection {
+    background: rgba(255, 255, 255, 0.7);
+    }
     @media screen and (max-width: 680px) {
         ::-webkit-scrollbar {
     width: .5rem;

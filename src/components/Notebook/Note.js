@@ -1,287 +1,278 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
-import ArrowIn from "../../images/arrow-in.svg";
-import ArrowInWhite from "../../images/arrow-inWhite.svg";
-import ArrowOut from "../../images/arrow-outWhite.svg";
-import ArrowOutWhite from "../../images/arrow-out.svg";
-import AddIcon from "../../images/AddIcon.svg";
-import NoteForm from "./NoteForm";
+import { useSelector } from "react-redux";
 
-const Note = ({ title, description, note, notes, setNote, date }) => {
-  const [toggleNoteList, setToggleNoteList] = useState(false);
-  const [inputTitle, setInputTitle] = useState("");
-  const [inputDesc, setInputDesc] = useState("");
-  const [copy, setCopy] = useState(notes.notesItems);
-  const [deleteInf, setDeleteInf] = useState(false);
+const Note = ({
+  copy,
+  setCopy,
+  setInputTitle,
+  setInputDesc,
+  toggleNoteList,
+  setNote,
+  note,
+}) => {
   const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
-  const deleteHandler = () => {
-    setNote(note.filter((el) => el.id !== notes.id));
-  };
-  const toggleIcon = () => {
-    if (!toggleDarkMode) {
-      if (toggleNoteList) {
-        return ArrowOut;
-      } else {
-        return ArrowIn;
-      }
-    } else {
-      if (toggleNoteList) {
-        return ArrowOutWhite;
-      } else {
-        return ArrowInWhite;
-      }
-    }
-  };
-
-  const addNoteHandler = () => {
-    setNote(
-      note.map((el) => {
-        return {
-          ...el,
-        };
-      })
-    );
-    copy.push({
-      noteTitle: "",
-      noteDesc: "",
-      uuid: Math.random() * 100,
-      parentId: notes.id,
-    });
-    setToggleNoteList(true);
-  };
   return (
-    <Wrapper>
-      <InfoWrapper
-        className={
-          toggleNoteList
-            ? `toggle ${toggleDarkMode && " darkMode"}`
-            : toggleDarkMode && " darkMode"
-        }
-      >
-        <NoteInfoWrapper className={toggleNoteList && "toggle"}>
-          <NoteHeader>{title}</NoteHeader>
-          <NoteDesc>{description}</NoteDesc>
-          <p>Ilość notatek: {copy.length}</p>
-          <p>Data dodania: {date}</p>
-        </NoteInfoWrapper>
-        <IconWrapper
-          className={toggleNoteList ? `toggle` : toggleDarkMode && " darkMode"}
-        >
-          <Icon src={AddIcon} onClick={addNoteHandler} />
-          <Icon
-            src={
-              !toggleDarkMode
-                ? toggleNoteList
-                  ? ArrowOutWhite
-                  : ArrowIn
-                : toggleNoteList
-                ? ArrowOut
-                : ArrowInWhite
+    <NoteWrapper
+      className={
+        toggleNoteList
+          ? `toggle ${toggleDarkMode && " darkMode"}`
+          : toggleDarkMode && " darkMode"
+      }
+    >
+      {copy.map((item) => (
+        <Wrap key={item.uuid} className={toggleNoteList && "toggle"}>
+          <FormWrapper
+            className={
+              toggleNoteList
+                ? `toggle ${toggleDarkMode && " darkMode"}`
+                : toggleDarkMode && " darkMode"
             }
-            onClick={() => {
-              copy.length > 0
-                ? setToggleNoteList(!toggleNoteList)
-                : setToggleNoteList(false);
-            }}
-          />
-          <Icon
-            src={xMark}
-            onClick={() => setDeleteInf(!deleteInf)}
-            className={toggleNoteList && "deleteBtn"}
-          />
-          <DeleteInfo className={deleteInf && "toggle"}>
-            <Btn onClick={deleteHandler}>Usuń</Btn>
-            <Btn onClick={() => setDeleteInf(false)}>Anuluj</Btn>
-          </DeleteInfo>
-        </IconWrapper>
-      </InfoWrapper>
-      <>
-        <NoteForm
-          setInputTitle={setInputTitle}
-          setInputDesc={setInputDesc}
-          copy={copy}
-          setNote={setNote}
-          note={note}
-          toggleNoteList={toggleNoteList}
-          setToggleNoteList={setToggleNoteList}
-          setCopy={setCopy}
-        />
-      </>
-    </Wrapper>
+          >
+            <TitleInput
+              className={
+                toggleNoteList
+                  ? `toggle ${toggleDarkMode && " darkMode"}`
+                  : toggleDarkMode && " darkMode"
+              }
+              maxLength="60"
+              value={item.noteTitle}
+              type="text"
+              onChange={(e) => {
+                item.noteTitle = e.target.value;
+                setInputTitle(e.target.value);
+                setNote(
+                  note.map((el) => {
+                    return {
+                      ...el,
+                    };
+                  })
+                );
+              }}
+            />
+            <DescInput
+              className={
+                toggleNoteList
+                  ? `toggle ${toggleDarkMode && " darkMode"}`
+                  : toggleDarkMode && " darkMode"
+              }
+              value={item.noteDesc}
+              onChange={(e) => {
+                item.noteDesc = e.target.value;
+                setInputDesc(e.target.value);
+                setNote(
+                  note.map((el) => {
+                    return {
+                      ...el,
+                    };
+                  })
+                );
+              }}
+              type="text"
+            />
+            <Icon
+              className={toggleNoteList && "toggle"}
+              src={xMark}
+              onClick={() => {
+                let index = copy.indexOf(item);
+                if (index > -1) {
+                  copy.splice(index, 1);
+                }
+                setCopy(
+                  copy.map((x) => {
+                    return {
+                      ...x,
+                    };
+                  })
+                );
+                setNote(
+                  note.map((el) => {
+                    return {
+                      ...el,
+                    };
+                  })
+                );
+              }}
+            />
+          </FormWrapper>
+        </Wrap>
+      ))}
+    </NoteWrapper>
   );
 };
 
-const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
+const NoteWrapper = styled.div`
+  width: 70rem;
   transition: 0.5s ease;
-  &:first-child {
-    margin-top: 4rem;
-  }
-  &:last-child {
-    margin-bottom: 4rem;
+  display: flex;
+  &.toggle {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    right: 0;
+    position: fixed;
+    z-index: 5;
+    padding: 5rem;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transition: 0.5s ease;
+    overflow-y: scroll;
+    &.darkMode {
+      background: rgba(53, 53, 53, 0.8);
+    }
+    @media screen and (max-width: 820px) {
+      padding: 0;
+    }
   }
 `;
-const InfoWrapper = styled.div`
+
+const FormWrapper = styled.div`
   position: relative;
   display: flex;
-  min-height: 10rem;
-  max-height: auto;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(3.5px);
-  -webkit-backdrop-filter: blur(3.5px);
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  padding: 2rem;
+  background: #fff;
   border-radius: 10px;
-  margin: 1rem;
-  min-width: 20rem;
+  height: 85%;
   &.darkMode {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border-radius: 10px;
+    background: #1d1d1d;
   }
   &.toggle {
-    position: fixed;
-    min-width: 5rem;
-    transition: 0.5s ease;
-    top: 0;
-    height: 10rem;
-    z-index: 6;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 10px;
+    margin-left: 10rem;
+    padding: 1rem;
+    width: 90%;
+    height: auto;
     &.darkMode {
-      background: #4e4e4e;
+      background: #1d1d1d;
+    }
+    &:last-child {
+      margin-bottom: 10rem;
+    }
+    &:first-child {
+      margin-top: 15rem;
     }
     @media screen and (max-width: 820px) {
       width: 100%;
-      height: 8rem;
-      margin: 0;
       padding: 1rem;
-      z-index: 6;
-      border-radius: 0;
-    }
-  }
-  @media screen and (max-width: 820px) {
-    width: 100%;
-  }
-`;
-const NoteInfoWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1rem;
-  overflow: hidden;
-  p {
-    width: 100%;
-    font-size: 1rem;
-  }
-  &.toggle {
-    display: none;
-  }
-`;
-const NoteHeader = styled.h3`
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
-  width: 80%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-family: "Lato", sans-serif;
-`;
-const NoteDesc = styled.h4`
-  font-size: 1.4rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-  width: 70%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-family: "Lato", sans-serif;
-`;
-const IconWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  height: 100%;
-  margin-right: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 0.5rem;
-  &.darkMode {
-    background: #4e4e4e;
-  }
-  &.toggle {
-    position: relative;
-    align-items: center;
-    background: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    @media screen and (max-width: 820px) {
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: flex-end;
+      margin: 0.5rem;
+      &:first-child {
+        margin-top: 5rem;
+      }
     }
   }
 `;
+
 const Icon = styled.img`
-  width: 2.5rem;
-  height: 2.5rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 50%;
+  &::selection {
+    background: none;
+  }
   &:hover {
     transform: scale(1.2);
     transition: 0.5s ease;
   }
-  &.checked {
-    background: #01c915;
-  }
-  &.deleteBtn {
-    display: none;
-  }
-`;
-const DeleteInfo = styled.div`
-  display: none;
   &.toggle {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    left: 50%;
-    top: 50%;
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.8);
-    overflow: hidden;
-    /* @media screen and (max-width: 820px) {
-      display: none;
-    } */
+    @media screen and (max-width: 820px) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;
-const Btn = styled.button`
-  width: 100%;
-  height: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 2.4rem;
-  font-weight: bold;
+const TitleInput = styled.input`
   border: none;
-  cursor: pointer;
-  transition: 0.5s ease;
-  &:hover {
-    background: rgba(0, 0, 0, 0.8);
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: none;
+  border-bottom: 3px solid #01c915;
+  font-family: "Lato", sans-serif;
+  &:focus {
+    outline: none;
+  }
+  &.darkMode {
+    color: #fff;
+  }
+  &.toggle {
+    font-size: 1.8rem;
+    width: 80%;
     transition: 0.5s ease;
-    &:nth-child(1) {
-      color: red;
+    padding: 0.5rem;
+    &.darkMode {
+      color: white;
     }
-    &:nth-child(2) {
-      color: #01c915;
+    @media screen and (max-width: 820px) {
+      width: 90%;
+      font-size: 1rem;
+    }
+  }
+`;
+
+const DescInput = styled.textarea`
+  border: none;
+  background: none;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  resize: none;
+  font-family: "Lato", sans-serif;
+  &:focus {
+    outline: none;
+  }
+  &.darkMode {
+    color: white;
+  }
+  &.toggle {
+    background: #f1f1f1;
+    font-size: 1.4rem;
+    padding: 1rem;
+    overflow-y: scroll;
+    margin-top: 2rem;
+    width: 100%;
+    height: 25rem;
+    transition: 0.5s ease;
+    &.darkMode {
+      background: #535353;
+      color: white;
+    }
+    @media screen and (max-width: 820px) {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0;
+    }
+  }
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  margin: 0 0.5rem;
+  transition: 0.5s ease;
+  &.toggle {
+    margin-bottom: 5rem;
+    width: 95%;
+    height: 30rem;
+    transition: 0.5s ease;
+    @media screen and (max-width: 820px) {
+      position: relative;
+      height: 32rem;
+      top: 25%;
+      width: 100%;
+      margin: 1rem;
     }
   }
 `;

@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/Button";
 
 const Hero = () => {
+  const dispatch = useDispatch();
   const toggle = useSelector((state) => state.toggle);
   const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
-  const dispatch = useDispatch();
   const [toggleOptions, setToggleOptions] = useState(false);
   let [text, setText] = useState(0);
 
@@ -59,15 +59,14 @@ const Hero = () => {
   );
 };
 
-const HeroImage = styled.img`
-  position: fixed;
-  width: 100vw;
+const Wrapper = styled.div`
+  width: 100%;
   height: 100vh;
-  object-fit: cover;
-  opacity: 0.7;
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &.darkMode {
-    filter: brightness(30%);
+    color: #fff;
   }
 `;
 
@@ -89,92 +88,22 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &.darkMode {
-    color: white;
-  }
-`;
-
-const MainIcon = styled.img`
-  width: 4rem;
-  height: 4rem;
-  cursor: pointer;
-  transition: 0.5s ease;
-  z-index: 2;
-  margin-bottom: 10rem;
-  &:hover {
-    transform: scale(1.4) rotate(-360deg);
-    transition: 0.5s ease;
-  }
-  @media (max-width: 820px) {
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: 2rem;
-  }
-`;
-
-const ButtonsWrapper = styled.div`
-  display: none;
-  transition: 0.5s ease;
-  opacity: 0;
-  pointer-events: none;
-  &.toggle {
-    display: flex;
-    pointer-events: all;
-    opacity: 1;
-  }
-  @media screen and (max-width: 820px) {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-  button {
-    margin: 1rem;
-  }
-`;
-
-const IconWrapper = styled.div`
-  position: relative;
-  display: flex;
-  &::after {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 4rem;
-    height: 4rem;
-    position: absolute;
-    border-radius: 50%;
-    animation: Pulse ease 4s infinite;
-    @media (max-width: 820px) {
-      display: none;
-    }
-  }
-  @keyframes Pulse {
-    50% {
-      box-shadow: 0px 0px 20px 10px #01c915;
-      transform: scale(1.1);
-    }
-  }
-`;
-
 const Header = styled.h1`
   position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   margin: 10rem 0;
   font-size: 3.6rem;
-  display: flex;
-  flex-direction: column;
   line-height: 4rem;
   span {
     position: absolute;
     bottom: -4rem;
+    &::selection {
+      background: none;
+    }
     &.toggle {
       opacity: 1;
       transition: 0.5s ease;
@@ -191,6 +120,74 @@ const Header = styled.h1`
     margin: 5rem 0;
     font-size: 2.4rem;
     line-height: 3rem;
+  }
+`;
+
+const IconWrapper = styled.div`
+  position: relative;
+  display: flex;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    animation: Pulse ease 4s infinite;
+    @media (max-width: 820px) {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  @keyframes Pulse {
+    50% {
+      box-shadow: 0px 0px 20px 10px #01c915;
+      transform: scale(1.1);
+    }
+  }
+`;
+
+const MainIcon = styled.img`
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+  transition: 0.5s ease;
+  z-index: 2;
+  margin-bottom: 5rem;
+  &::selection {
+    background: none;
+  }
+  &:hover {
+    transform: scale(1.3) rotate(-360deg);
+    transition: 0.5s ease;
+  }
+  @media (max-width: 820px) {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 2.5rem;
+  }
+`;
+
+const ButtonsWrapper = styled.div`
+  display: none;
+  &.toggle {
+    display: flex;
+    @media screen and (max-width: 820px) {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+`;
+
+const HeroImage = styled.img`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.7;
+  z-index: 1;
+  &.darkMode {
+    filter: brightness(30%);
   }
 `;
 
