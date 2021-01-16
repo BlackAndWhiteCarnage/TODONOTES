@@ -101,7 +101,7 @@ const Notebook = ({ title, description, note, notes, setNote, date }) => {
 
 const NotebookWrapper = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 100vh;
   display: flex;
   &:first-child {
     margin-top: 4rem;
@@ -115,12 +115,15 @@ const NotebookWrapper = styled.div`
 `;
 const NotebookInfoWrapper = styled.div`
   display: flex;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(3.5px);
-  -webkit-backdrop-filter: blur(3.5px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  height: 18rem;
   border-radius: 10px;
+  min-width: 40rem;
+  max-width: 40rem;
   margin: 1rem;
-  min-width: 20rem;
   &.darkMode {
     background: rgba(0, 0, 0, 0.4);
   }
@@ -144,6 +147,10 @@ const NotebookInfoWrapper = styled.div`
       border-radius: 0;
     }
   }
+  @media screen and (max-width: 820px) {
+    min-width: 20rem;
+    height: auto;
+  }
 `;
 
 const NotebookInfo = styled.div`
@@ -152,12 +159,12 @@ const NotebookInfo = styled.div`
   padding: 1rem;
   overflow: hidden;
   p {
-    border-bottom: 2px solid black;
+    border-top: 2px solid black;
     width: 55%;
-    height: 3rem;
     font-size: 1rem;
+    padding: 0.5rem 0;
     &.darkMode {
-      border-bottom: 2px solid white;
+      border-top: 2px solid white;
     }
   }
   &.toggle {
@@ -169,7 +176,7 @@ const NoteHeader = styled.h3`
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  width: 100%;
+  width: 90%;
   font-family: "Lato", sans-serif;
 `;
 

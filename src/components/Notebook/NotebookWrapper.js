@@ -72,10 +72,10 @@ const NotebookFormWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(3.5px);
-    -webkit-backdrop-filter: blur(3.5px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: 10px;
     transition: 0.5s ease;
     z-index: 5;

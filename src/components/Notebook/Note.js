@@ -104,10 +104,12 @@ const Note = ({
 };
 
 const NoteWrapper = styled.div`
-  width: 70rem;
+  width: auto;
+  height: 18rem;
   transition: 0.5s ease;
   display: flex;
   &.toggle {
+    height: 100%;
     top: 0;
     left: 0;
     bottom: 0;
@@ -118,7 +120,6 @@ const NoteWrapper = styled.div`
     padding: 5rem;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     transition: 0.5s ease;
     overflow-y: scroll;
     &.darkMode {
@@ -135,11 +136,12 @@ const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   justify-content: center;
   padding: 2rem;
-  background: #fff;
+  background: #f1f1f1;
   border-radius: 10px;
-  height: 85%;
+  border: 1px solid #01c915;
   &.darkMode {
     background: #1d1d1d;
   }
@@ -151,11 +153,11 @@ const FormWrapper = styled.div`
     &.darkMode {
       background: #1d1d1d;
     }
+    &:first-child {
+      margin-top: 10rem;
+    }
     &:last-child {
       margin-bottom: 10rem;
-    }
-    &:first-child {
-      margin-top: 15rem;
     }
     @media screen and (max-width: 820px) {
       width: 100%;
@@ -192,6 +194,7 @@ const Icon = styled.img`
   }
 `;
 const TitleInput = styled.input`
+  height: 20%;
   border: none;
   font-size: 1.2rem;
   font-weight: bold;
@@ -220,6 +223,7 @@ const TitleInput = styled.input`
 `;
 
 const DescInput = styled.textarea`
+  height: 80%;
   border: none;
   background: none;
   margin-top: 0.5rem;
@@ -235,14 +239,13 @@ const DescInput = styled.textarea`
     color: white;
   }
   &.toggle {
-    background: #f1f1f1;
+    background: #fff;
     font-size: 1.4rem;
     padding: 1rem;
     overflow-y: scroll;
     margin-top: 2rem;
     width: 100%;
     height: 25rem;
-    transition: 0.5s ease;
     &.darkMode {
       background: #535353;
       color: white;
@@ -258,15 +261,13 @@ const DescInput = styled.textarea`
 const Wrap = styled.div`
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 30rem;
   height: 100%;
-  margin: 0 0.5rem;
-  transition: 0.5s ease;
+  margin: 1rem;
   &.toggle {
     margin-bottom: 5rem;
     width: 95%;
     height: 30rem;
-    transition: 0.5s ease;
     @media screen and (max-width: 820px) {
       position: relative;
       height: 32rem;

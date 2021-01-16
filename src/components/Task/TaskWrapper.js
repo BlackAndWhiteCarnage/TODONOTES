@@ -76,10 +76,10 @@ const TaskFormWrapper = styled.div`
     align-items: flex-start;
     align-items: center;
     justify-content: space-around;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(3.5px);
-    -webkit-backdrop-filter: blur(3.5px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: 10px;
     width: 60%;
     z-index: 5;
@@ -106,10 +106,10 @@ const TaskListWrapper = styled.div`
     pointer-events: all;
     z-index: 5;
     overflow-y: scroll;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(3.5px);
-    -webkit-backdrop-filter: blur(3.5px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: 10px;
     width: 60%;
     height: 50rem;
