@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import DarkModeIcon from "../images/DarkModeIcon.svg";
-import ColorIcon from "../images/ColorIcon.svg";
+import DarkModeIconWhite from "../images/DarkModeIconWhite.svg";
 import AddIcon from "../images/AddIcon.svg";
 import HomeIcon from "../images/Home.svg";
+import HomeIconWhite from "../images/HomeWhite.svg";
 import BackIcon from "../images/Back.svg";
+import BackIconWhite from "../images/BackWhite.svg";
 import { useDispatch, useSelector } from "react-redux";
 
 const Modal = () => {
-  const [showColors, setShowColors] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
@@ -16,31 +17,20 @@ const Modal = () => {
 
   return (
     <ModalWrapper className={toggleDarkMode && "darkMode"}>
-      <Icon src={HomeIcon} onClick={() => dispatch({ type: "BACK" })} />
-      <Icon src={ColorIcon} onClick={() => setShowColors(!showColors)} />
-      <Colors className={showColors && "toggle"}>
-        <Color
-          className={showColors && "toggle purple"}
-          onClick={() => setShowColors(false)}
-        />
-        <Color
-          className={showColors && "toggle yellow"}
-          onClick={() => setShowColors(false)}
-        />
-        <Color
-          className={showColors && "toggle green"}
-          onClick={() => setShowColors(false)}
-        />
-      </Colors>
       <Icon
-        src={DarkModeIcon}
+        src={toggleDarkMode ? HomeIconWhite : HomeIcon}
+        onClick={() => dispatch({ type: "BACK" })}
+      />
+      <Icon
+        src={toggleDarkMode ? DarkModeIconWhite : DarkModeIcon}
         onClick={() => {
           dispatch({ type: "DARKMODE" });
-          console.log(toggleDarkMode);
         }}
       />
       <Icon src={AddIcon} onClick={() => setShowOptions(!showOptions)} />
-      <Options className={showOptions && "toggle"}>
+      <Options
+        className={showOptions ? `toggle` : toggleDarkMode && " darkMode"}
+      >
         <Option
           className={showOptions && "toggle"}
           onClick={() => {
@@ -59,7 +49,10 @@ const Modal = () => {
         >
           <span>zadanie</span>
         </Option>
-        <Icon src={BackIcon} onClick={() => setShowOptions(false)} />
+        <Icon
+          src={toggleDarkMode ? BackIconWhite : BackIcon}
+          onClick={() => setShowOptions(false)}
+        />
       </Options>
     </ModalWrapper>
   );
@@ -91,18 +84,6 @@ const ModalWrapper = styled.div`
   }
 `;
 
-const Colors = styled.div`
-  transition: 0.5s ease;
-  width: 0;
-  display: none;
-  &.toggle {
-    width: 15rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-`;
-
 const Options = styled.div`
   transition: 0.5s ease;
   width: 0;
@@ -117,7 +98,7 @@ const Options = styled.div`
       position: absolute;
       width: 100%;
       height: 100%;
-      background: #fff;
+      background: #01c915;
       z-index: 22;
       display: flex;
       align-items: center;
@@ -130,44 +111,20 @@ const Option = styled.li`
   font-size: 0;
   cursor: pointer;
   white-space: nowrap;
+  transition: 0.3s ease;
+  color: #01c915;
   &:hover {
-    border-bottom: 2px solid black;
+    transform: scale(0.9);
+    transition: 0.3s ease;
   }
   span {
     font-weight: bold;
-    color: #01c915;
+    @media (max-width: 820px) {
+      color: black;
+    }
   }
   &.toggle {
     font-size: 1.6rem;
-  }
-`;
-
-const Color = styled.div`
-  border-radius: 50%;
-  width: 0rem;
-  height: 0rem;
-  transition: 0.5s ease;
-  cursor: pointer;
-  &.toggle {
-    width: 2.5rem;
-    height: 2.5rem;
-    transition: 0.5s ease;
-    @media (max-width: 820px) {
-      width: 2rem;
-      height: 2rem;
-    }
-  }
-  &.purple {
-    background: #dc009e;
-  }
-  &.yellow {
-    background: #ffc700;
-  }
-  &.green {
-    background: #01c915;
-  }
-  &:hover {
-    transform: scale(1.2);
   }
 `;
 

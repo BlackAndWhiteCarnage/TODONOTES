@@ -47,6 +47,7 @@ const TaskForm = ({
         onChange={inputTitleHandler}
         id="Notebook"
         type="text"
+        maxLength="80"
       />
       <label htmlFor="Description">Opis</label>
       <DescriptionInput
@@ -55,6 +56,7 @@ const TaskForm = ({
         onChange={inputDescHandler}
         id="Description"
         type="text"
+        maxLength="100"
       />
       <Button
         click={() => {
@@ -75,6 +77,8 @@ const TitleInput = styled.input`
   font-size: 1.6rem;
   border-bottom: 3px solid #01c915;
   padding: 1rem 0;
+  font-family: "Lato", sans-serif;
+
   &.darkMode {
     background: #353535;
     color: white;
@@ -92,6 +96,8 @@ const DescriptionInput = styled.textarea`
   font-size: 2rem;
   border-bottom: 3px solid #01c915;
   resize: none;
+  font-family: "Lato", sans-serif;
+
   &.darkMode {
     background: #353535;
     color: white;

@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import xMark from "../../images/X-Mark.svg";
 import ArrowIn from "../../images/arrow-in.svg";
-import ArrowOut from "../../images/arrow-out.svg";
+import ArrowInWhite from "../../images/arrow-inWhite.svg";
+import ArrowOut from "../../images/arrow-outWhite.svg";
+import ArrowOutWhite from "../../images/arrow-out.svg";
 import AddIcon from "../../images/AddIcon.svg";
 import NoteForm from "./NoteForm";
 
@@ -17,6 +19,21 @@ const Note = ({ title, description, note, notes, setNote, date }) => {
 
   const deleteHandler = () => {
     setNote(note.filter((el) => el.id !== notes.id));
+  };
+  const toggleIcon = () => {
+    if (!toggleDarkMode) {
+      if (toggleNoteList) {
+        return ArrowOut;
+      } else {
+        return ArrowIn;
+      }
+    } else {
+      if (toggleNoteList) {
+        return ArrowOutWhite;
+      } else {
+        return ArrowInWhite;
+      }
+    }
   };
 
   const addNoteHandler = () => {
@@ -55,7 +72,15 @@ const Note = ({ title, description, note, notes, setNote, date }) => {
         >
           <Icon src={AddIcon} onClick={addNoteHandler} />
           <Icon
-            src={toggleNoteList ? ArrowOut : ArrowIn}
+            src={
+              !toggleDarkMode
+                ? toggleNoteList
+                  ? ArrowOutWhite
+                  : ArrowIn
+                : toggleNoteList
+                ? ArrowOut
+                : ArrowInWhite
+            }
             onClick={() => {
               copy.length > 0
                 ? setToggleNoteList(!toggleNoteList)
@@ -104,7 +129,8 @@ const Wrapper = styled.div`
 const InfoWrapper = styled.div`
   position: relative;
   display: flex;
-  height: 10rem;
+  min-height: 10rem;
+  max-height: auto;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(3.5px);
   -webkit-backdrop-filter: blur(3.5px);
@@ -113,7 +139,6 @@ const InfoWrapper = styled.div`
   min-width: 20rem;
   &.darkMode {
     background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: 10px;
@@ -131,7 +156,6 @@ const InfoWrapper = styled.div`
       background: #4e4e4e;
     }
     @media screen and (max-width: 820px) {
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       width: 100%;
       height: 8rem;
       margin: 0;
@@ -159,17 +183,21 @@ const NoteInfoWrapper = styled.div`
 `;
 const NoteHeader = styled.h3`
   font-size: 1.6rem;
+  margin-bottom: 1rem;
   font-weight: bold;
   width: 80%;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-family: "Lato", sans-serif;
 `;
 const NoteDesc = styled.h4`
   font-size: 1.4rem;
   font-weight: 400;
+  margin-bottom: 1rem;
   width: 70%;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-family: "Lato", sans-serif;
 `;
 const IconWrapper = styled.div`
   position: absolute;
@@ -191,7 +219,6 @@ const IconWrapper = styled.div`
     width: 100%;
     margin: 0;
     padding: 0;
-
     @media screen and (max-width: 820px) {
       flex-direction: row;
       justify-content: space-around;

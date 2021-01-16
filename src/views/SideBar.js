@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../images/Logo.svg";
+import LogoWhite from "../images/LogoWhite.svg";
 import { useDispatch, useSelector } from "react-redux";
 import NotebookIcon from "../images/NotebookIcon.svg";
 import TaskIcon from "../images/TaskIcon.svg";
@@ -15,13 +16,21 @@ const Sidebar = () => {
       <SideBar>
         <LogoWrapper
           src={
-            toggle === 0
-              ? Logo
+            !toggleDarkMode
+              ? toggle === 0
+                ? Logo
+                : toggle === 4
+                ? NotebookIcon
+                : toggle === 3
+                ? TaskIcon
+                : Logo
+              : toggle === 0
+              ? LogoWhite
               : toggle === 4
               ? NotebookIcon
               : toggle === 3
               ? TaskIcon
-              : Logo
+              : LogoWhite
           }
           onClick={() => dispatch({ type: "BACK" })}
         />

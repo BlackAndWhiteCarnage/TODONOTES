@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Button from "../Button";
 
 const TaskForm = ({ inputText, setInputText, tasks, setTasks }) => {
+  const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
   const dispatch = useDispatch();
 
   const inputTextHandler = (e) => {
@@ -22,6 +23,7 @@ const TaskForm = ({ inputText, setInputText, tasks, setTasks }) => {
     <>
       <label htmlFor="Task">Zadanie</label>
       <Input
+        className={toggleDarkMode && "darkMode"}
         value={inputText}
         onChange={inputTextHandler}
         id="Task"
@@ -46,6 +48,10 @@ const Input = styled.input`
   font-size: 1.6rem;
   border-bottom: 3px solid #01c915;
   padding: 1rem 0;
+  &.darkMode {
+    background: #353535;
+    color: white;
+  }
   @media screen and (max-width: 820px) {
     font-size: 1.2rem;
   }

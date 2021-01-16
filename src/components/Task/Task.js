@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import CheckedIcon from "../../images/CheckedIcon.svg";
 import UncheckedIcon from "../../images/UncheckedIcon.svg";
-import InfoIcon from "../../images/InfoIcon.svg";
+import UncheckedIconWhite from "../../images/UncheckedIconWhite.svg";
 import { useSelector } from "react-redux";
 import xMark from "../../images/X-Mark.svg";
 
 const Task = ({ text, tasks, task, setTasks }) => {
-  const [toggle, setToggle] = useState(false);
   const toggleDarkMode = useSelector((state) => state.toggleDarkMode);
 
   const deleteHandler = () => {
@@ -40,10 +39,15 @@ const Task = ({ text, tasks, task, setTasks }) => {
         <TaskHeader>{text}</TaskHeader>
         <IconWrapper>
           <Icon
-            src={task.completed ? CheckedIcon : UncheckedIcon}
+            src={
+              task.completed
+                ? CheckedIcon
+                : toggleDarkMode
+                ? UncheckedIconWhite
+                : UncheckedIcon
+            }
             onClick={completeHandler}
           />
-          <Icon src={InfoIcon} onClick={() => setToggle(!toggle)} />
           <Icon src={xMark} onClick={deleteHandler} />
         </IconWrapper>
       </Wrapper>
@@ -82,10 +86,11 @@ const TaskHeader = styled.h2`
   display: block;
   margin-left: 1rem;
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: 700;
   width: 70%;
   word-wrap: break-word;
   white-space: wrap;
+  font-family: "Lato", sans-serif;
 `;
 
 const IconWrapper = styled.div`

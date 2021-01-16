@@ -37,6 +37,7 @@ const NoteForm = ({
                   ? `toggle ${toggleDarkMode && " darkMode"}`
                   : toggleDarkMode && " darkMode"
               }
+              maxLength="30"
               value={item.noteTitle}
               type="text"
               onChange={(e) => {
@@ -140,9 +141,9 @@ const FormWrapper = styled.div`
   padding: 2rem;
   background: #fff;
   border-radius: 0.5rem;
-  height: 10rem;
+  height: 90%;
   &.darkMode {
-    background: #4e4e4e;
+    background: #363636;
   }
   &.toggle {
     margin-left: 10rem;
@@ -163,7 +164,7 @@ const FormWrapper = styled.div`
       padding: 1rem;
       margin: 0.5rem;
       &:first-child {
-        margin-top: 0;
+        margin-top: 5rem;
       }
     }
   }
@@ -202,6 +203,8 @@ const TitleInput = styled.input`
   font-weight: bold;
   background: none;
   border-bottom: 3px solid #01c915;
+  font-family: "Lato", sans-serif;
+
   &.darkMode {
     color: white;
   }
@@ -229,6 +232,8 @@ const DescInput = styled.textarea`
   margin-bottom: 0.5rem;
   overflow: hidden;
   resize: none;
+  font-family: "Lato", sans-serif;
+
   &.darkMode {
     color: white;
   }
@@ -260,6 +265,7 @@ const Wrap = styled.div`
   align-items: center;
   transition: 0.5s ease;
   margin-left: 1rem;
+  height: 100%;
   &.toggle {
     margin-bottom: 5rem;
     width: 95%;

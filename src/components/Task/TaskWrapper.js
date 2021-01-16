@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import BackIcon from "../../images/Back.svg";
+import BackIconWhite from "../../images/BackWhite.svg";
 import TasksList from "./TasksList";
 import TaskForm from "./TaskForm";
 
@@ -41,12 +42,18 @@ const TaskWrapper = () => {
           inputText={inputText}
           setInputText={setInputText}
         />
-        <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
+        <Icon
+          src={toggleDarkMode ? BackIconWhite : BackIcon}
+          onClick={() => dispatch({ type: "BACK" })}
+        />
       </Wrapper>
       <TasksWrapper
         className={toggle === 3 && `toggle ${toggleDarkMode && " darkMode"}`}
       >
-        <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
+        <Icon
+          src={toggleDarkMode ? BackIconWhite : BackIcon}
+          onClick={() => dispatch({ type: "BACK" })}
+        />
         <TasksList tasks={tasks} setTasks={setTasks} />
       </TasksWrapper>
     </>

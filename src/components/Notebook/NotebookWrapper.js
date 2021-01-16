@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import BackIcon from "../../images/Back.svg";
+import BackIconWhite from "../../images/BackWhite.svg";
 import NotebookList from "./NotebookList";
 import NotebookForm from "./NotebookForm";
 
@@ -29,7 +30,6 @@ const NotebookWrapper = () => {
       setNote(notebooksLocal);
     }
   };
-  console.log(toggleDarkMode);
   return (
     <>
       <Wrapper
@@ -43,7 +43,10 @@ const NotebookWrapper = () => {
           inputDesc={inputDesc}
           setInputDesc={setInputDesc}
         />
-        <Icon src={BackIcon} onClick={() => dispatch({ type: "BACK" })} />
+        <Icon
+          src={toggleDarkMode ? BackIconWhite : BackIcon}
+          onClick={() => dispatch({ type: "BACK" })}
+        />
       </Wrapper>
       <NotebooksListWrapper className={toggle === 4 && "toggle"}>
         <NotebookList note={note} setNote={setNote} />

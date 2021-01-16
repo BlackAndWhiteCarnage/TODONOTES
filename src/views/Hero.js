@@ -64,10 +64,10 @@ const HeroImage = styled.img`
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  opacity: 0.8;
+  opacity: 0.7;
   z-index: 1;
   &.darkMode {
-    filter: brightness(35%);
+    filter: brightness(30%);
   }
 `;
 
