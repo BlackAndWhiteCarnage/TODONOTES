@@ -79,11 +79,11 @@ const Notebook = ({ title, description, note, notes, setNote, date }) => {
             onClick={() => setDeleteInf(!deleteInf)}
             className={toggleNoteList && "deleteBtn"}
           />
-          <DeleteInfoWrapper className={deleteInf && "toggle"}>
-            <Btn onClick={deleteHandler}>Usuń</Btn>
-            <Btn onClick={() => setDeleteInf(false)}>Anuluj</Btn>
-          </DeleteInfoWrapper>
         </IconsWrapper>
+        <DeleteInfoWrapper className={deleteInf && "toggle"}>
+          <Btn onClick={deleteHandler}>Usuń</Btn>
+          <Btn onClick={() => setDeleteInf(false)}>Anuluj</Btn>
+        </DeleteInfoWrapper>
       </NotebookInfoWrapper>
       <Note
         setInputTitle={setInputTitle}
@@ -235,9 +235,13 @@ const Icon = styled.img`
 `;
 
 const DeleteInfoWrapper = styled.div`
+  position: absolute;
   display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   &.toggle {
-    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
